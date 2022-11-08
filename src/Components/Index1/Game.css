@@ -1,11 +1,12 @@
 html,
-body {
+
+.game-body{
   padding: 0;
   margin: 0;
   background: #072333;
-  font-family: din-2014,sans-serif;
+  /* font-family: din-2014,sans-serif;
   font-weight: 800;
-  font-style: normal;
+  font-style: normal; */
 }
 
 * {
@@ -22,7 +23,7 @@ body {
   flex-direction: column;
   width: 100%;
   max-width: 500px;
-  height: calc(100% - 60px);
+  /* height: calc(100% - 60px); */
   left: 0;
   right: 0;
   margin: auto;
@@ -140,13 +141,13 @@ body {
   border-radius: 2px;; 
 }
 
-.row {
+/* .row {
   flex: 1 0 auto;
   margin: 0 5px 0 5px;
   overflow: hidden;
   border: solid 2px #ffd9009c;
   background: linear-gradient(0deg,  rgb(204, 203, 203)  0%, rgb(255, 255, 255)20%, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 80%, rgb(204, 203, 203) 100%);
-}
+} */
 
 .ringMoving {
   height: 200px;

@@ -2,11 +2,16 @@ import './Game.css';
 import handle from '../../Assets/handle.webp'
 
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom';
+import Header, { useWeb3Wallet } from '../../Common/Header';
+import { useContext } from 'react';
+import { Web3WalletContext } from '../../Context/UseContext';
+import BuyToken from '../BuyToken/BuyToken';
 
 
 
 const Game = ({ id, owned, close, expires }) => {
- 
+
     const [spin, setSpin] = useState(false)
     const [ring1, setRing1] = useState()
     const [ring2, setRing2] = useState()
@@ -241,12 +246,12 @@ const Game = ({ id, owned, close, expires }) => {
             }
 
         }
-        
+
         document.getElementById('handle-btn').style.cssText = "transform : rotate(-20deg) ;background: transparent;border: unset ; transition : all 0.3s ";
-        function changeHandle(){
+        function changeHandle() {
             document.getElementById('handle-btn').style.cssText = "transform : rotate(0deg) ;background: transparent;border: unset ;transition : all 0.3s ";
         }
-        setTimeout(changeHandle,300)
+        setTimeout(changeHandle, 300)
 
     }
 
@@ -310,53 +315,87 @@ const Game = ({ id, owned, close, expires }) => {
 
 
 
+    const { userConnected, accountAddress, walletConnected, ProvidermetamaskLogin, disconnectUser, getMetamaskAccount,WalletBalance,networkName } = useContext(Web3WalletContext);
+
+    // console.log('UserConnected', userConnected);
+    // console.log('AccountAddress', accountAddress);
+    // console.log('WalletConnected', walletConnected);
+    // console.log('Wallet Balance' , WalletBalance);
+
+
+
+
     return (
-        <div className='mt-5 row'style={{
-                border: 'unset',
-                background: 'unset',
-                height: '100vh'
-                
-            }}>
-            <div className='col-md-2'></div>
-            <div className='col-md-2  my-auto ' >
-            <button id='handle-btn'  onClick={() => play() } style={{
-                background: 'transparent',
-                border: 'unset'
-            }}>
-                
-                <img src={handle} alt="image" width='100%' />
-            </button>
-            </div>
+        <>
+            <section title='game-body' className='game-body'>
+                <p className='col-md-5  text-white' style={{border: '2px solid #454cff',borderRadius: '20px',paddingLeft:'20px'}}>
 
-            <div className="fullSlot col-md-10 p-2">
+                    <p > WalletAddress : {accountAddress ? accountAddress : 'please connect your wallet first' }</p>
+                    <p > Balance : {WalletBalance ? WalletBalance : 'Plz connect your wallet first'}</p>
+                    <p>Network Name : {networkName ? networkName : 'Plz connect your wallet first'}</p>
+                </p>
+                <div className='pt-5 row ' style={{
+                    border: 'unset',
+                    background: 'unset',
+                    height: '100vh'
 
-                <h1 className="casinoName">casino montecarlo</h1>
-                <h1 className="price">{"Jackpot: " + jackpot + "$"}</h1>
+                }}>
+                    <div className='col-md-2 text-white'>
 
-                <div className="slot justify-content-between">
-                    <div className="col-md-3  bg-light">
-                        {row1()}
                     </div>
-                    <div className="col-md-3  bg-light">
-                        {row2()}
+                    <div className='col-md-2  my-auto ' >
+                        {
+                            userConnected === true ?
+
+                                <button id='handle-btn' onClick={() => play()} style={{
+                                    background: 'transparent',
+                                    border: 'unset'
+                                }}>
+                                    {
+
+                                        <img src={handle} alt="image" width='100%' />
+
+                                    }
+                                </button> : <button className='btn btn-primary' onClick={ProvidermetamaskLogin} >Do you want to connect Plz Click Me</button>
+                        }
                     </div>
-                    <div className="col-md-3  bg-light">
-                        {row3()}
+
+                    <div className="fullSlot col-md-10 p-2">
+
+                        <h1 className="casinoName">casino montecarlo</h1>
+                        {/* <h1 className="casinoName">Jue ka Adda</h1> */}
+                        <h1 className="price">{"Jackpot: " + jackpot + "$"}</h1>
+
+                        <div className="slot  justify-content-between">
+                            <div className="col-md-3  bg-light">
+                                {row1()}
+                            </div>
+                            <div className="col-md-3  bg-light">
+                                {row2()}
+                            </div>
+                            <div className="col-md-3  bg-light">
+                                {row3()}
+                            </div>
+                        </div>
+
+                        <h1 className="price">
+                            {premio()}
+                        </h1>
+                        <div className="slotFoot">
+                            <input value={input} type="number" onChange={(e) => numChecker(e)} className="betInput" placeholder="0$"></input>
+
+                        </div>
+                        <h1 className="price">{"Available cash: " + Math.round((balance * 100)) / 100 + "$"}</h1>
+                        <button onClick={() => setBalance(balance + 1000)} className="buyMoreButton">Add 1000 $</button>
                     </div>
+
                 </div>
+            <BuyToken />
+            </section>
 
-                <h1 className="price">
-                    {premio()}
-                </h1>
-                <div className="slotFoot">
-                    <input value={input} type="number" onChange={(e) => numChecker(e)} className="betInput" placeholder="0$"></input>
-                  
-                </div>
-                <h1 className="price">{"Available cash: " + Math.round((balance * 100)) / 100 + "$"}</h1>
-                <button onClick={() => setBalance(balance + 1000)} className="buyMoreButton">Add 1000 $</button>
-            </div>
 
-        </div>
+
+        </>
     )
 }
 
