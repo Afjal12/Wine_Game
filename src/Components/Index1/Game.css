@@ -176,3 +176,7 @@ html,
   75% {transform: translateY(-80px)}
   100% {transform: translateY(-85px)}
   }
+.game-css{
+  border-radius: 20px;
+  border: 1px solid yellow;
+}

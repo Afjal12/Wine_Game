@@ -2,11 +2,13 @@ import './Game.css';
 import handle from '../../Assets/handle.webp'
 
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header, { useWeb3Wallet } from '../../Common/Header';
 import { useContext } from 'react';
 import { Web3WalletContext } from '../../Context/UseContext';
 import BuyToken from '../BuyToken/BuyToken';
+import { ContractFunctionsContext } from '../Utils/ContractFunctions';
+import Transaction from '../Transactions/Transaction';
 
 
 
@@ -315,7 +317,8 @@ const Game = ({ id, owned, close, expires }) => {
 
 
 
-    const { userConnected, accountAddress, walletConnected, ProvidermetamaskLogin, disconnectUser, getMetamaskAccount,WalletBalance,networkName } = useContext(Web3WalletContext);
+    const { userConnected, accountAddress, walletConnected, ProvidermetamaskLogin, disconnectUser, getMetamaskAccount, WalletBalance, networkName } = useContext(Web3WalletContext);
+    const { readBalanceOf, readDepositedTokens } = useContext(ContractFunctionsContext)
 
     // console.log('UserConnected', userConnected);
     // console.log('AccountAddress', accountAddress);
@@ -328,13 +331,24 @@ const Game = ({ id, owned, close, expires }) => {
     return (
         <>
             <section title='game-body' className='game-body'>
-                <p className='col-md-5  text-white' style={{border: '2px solid #454cff',borderRadius: '20px',paddingLeft:'20px'}}>
 
-                    <p > WalletAddress : {accountAddress ? accountAddress : 'please connect your wallet first' }</p>
-                    <p > Balance : {WalletBalance ? WalletBalance : 'Plz connect your wallet first'}</p>
-                    <p>Network Name : {networkName ? networkName : 'Plz connect your wallet first'}</p>
-                </p>
-                <div className='pt-5 row ' style={{
+                <div className="pagetitle text-light">
+                    <div className='w-25 mx-5 py-5 '>
+
+                        <h1 style={{color: 'rgba(255, 255, 255, 0.781)'}}>Bet Game</h1>
+                        <nav>
+                            <ol className="breadcrumb m-0">
+                                <li className="breadcrumb-item active">
+                                    <Link to="/"  style={{textDecoration: 'none'}}>dashboard</Link>
+                                </li>
+                                <li className="breadcrumb-item ">Bet</li>
+                                {/* <li className="breadcrumb-item active">Profile</li> */}
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+                <div className='pt-5 row w-100' style={{
                     border: 'unset',
                     background: 'unset',
                     height: '100vh'
@@ -360,7 +374,7 @@ const Game = ({ id, owned, close, expires }) => {
                         }
                     </div>
 
-                    <div className="fullSlot col-md-10 p-2">
+                    <div className="fullSlot col-md-10 p-2 game-css">
 
                         <h1 className="casinoName">casino montecarlo</h1>
                         {/* <h1 className="casinoName">Jue ka Adda</h1> */}
@@ -390,7 +404,8 @@ const Game = ({ id, owned, close, expires }) => {
                     </div>
 
                 </div>
-            <BuyToken />
+                {/* <BuyToken /> */}
+                {/* <Transaction /> */}
             </section>
 
 
