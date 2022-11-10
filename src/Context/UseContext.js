@@ -20,7 +20,8 @@ export default function MetamskConnect({ children }) {
 
   // const data = useContext(Web3WalletContext)
 
-  const ProvidermetamaskLogin = async () => {
+  const ProvidermetamaskLogin = async (e) => {
+    e.preventDefault();
     // eslint-disable-next-line
     if (window?.ethereum == undefined) {
       onboarding.startOnboarding();
