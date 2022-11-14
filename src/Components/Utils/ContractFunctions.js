@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { Web3WalletContext } from '../../Context/UseContext';
 import { useState } from 'react';
 import { formatEther, parseEther } from 'ethers/lib/utils';
+import { toast } from 'react-toastify';
 
 
 
@@ -21,7 +22,7 @@ export default function ContractFunctions({ children }) {
 
 
     function handleSetMatic(e) {
-        setMatic(e.target.value) 
+        setMatic(e.target.value)
         setToken((e.target.value) * 80)
     }
 
@@ -35,24 +36,26 @@ export default function ContractFunctions({ children }) {
         //  Function name - BuyTokens hai -write method ka 
         console.log("get token chal raha hai ");
         e.preventDefault();
-       try {
-        const provider = await new ethers.providers.Web3Provider(window.ethereum);
-        const signer = await provider.getSigner();
-        const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
-        console.log(daiContract);
-        console.log(accountAddress);
-        console.log(token);
-        console.log(matic);
+        try {
+            const provider = await new ethers.providers.Web3Provider(window.ethereum);
+            const signer = await provider.getSigner();
+            const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+            console.log(daiContract);
+            console.log(accountAddress);
+            console.log(token);
+            console.log(matic);
 
-            const decimal =await daiContract.BuyTokens(accountAddress,token,{
+            const decimal = await daiContract.BuyTokens(accountAddress, token, {
                 value: parseEther(matic)
             })
-        console.log(decimal);
-        // decimal.wait()
+            console.log(decimal);
+            // decimal.wait()
+            toast.success('Transaction Successful')
 
-       } catch (error) {
-        console.log(error);
-       }
+        } catch (error) {
+            console.log(error);
+            toast.warn('Transaction Failed')
+        }
     }
 
     useEffect(() => {
@@ -70,84 +73,149 @@ export default function ContractFunctions({ children }) {
             console.log(decimal);
             setreadBalanceOf(decimal);
         } catch (error) {
-          console.log(error);  
+            console.log(error);
         }
 
-      
+
 
     }
     const depositedTokens = async () => {
 
         // Function name - DepositedTokens hai - read method ka 
-       try {
-        const provider = await new ethers.providers.Web3Provider(window.ethereum);
-        const signer = await provider.getSigner();
-        const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
-        let deposit = await daiContract.DepositedTokens(accountAddress);
-        let decimal = deposit.toString();
-        console.log(decimal);
-        setreadDepositedTokens(decimal)
-
-       } catch (error) {
-        console.log(error);        
-       }
-    }
-
-// Contract Function Conponent Data and functions Write method ka Withdraw token
-
-const [withdrawAddress , setWithdrawAddress ] = useState('');
-const [withdrawTokens , setWithdrawTokens] = useState('');
-const handleWithdraw = (e) => {
-    setWithdrawAddress(e.target.value);
-}
-const handleTokens = (e) => {
-    setWithdrawTokens(e.target.value)
-}
-const ClickWithdrawFunction =async () => {
- 
-  if (withdrawTokens >= 50) {
-    try {
-        const provider = await new ethers.providers.Web3Provider(window.ethereum);
-        const signer = await provider.getSigner();
-        const daiContract = await new ethers.Contract(Contract_Address,SmartContractABI,signer);
-        console.log(daiContract);
-        console.log(withdrawAddress);
-        console.log(withdrawTokens);
-        let withdraw = await daiContract.withdrawTokens(withdrawAddress,withdrawTokens);
-        withdraw.wait()
-        console.log(withdraw);
-    
-    } catch (error) {
-        console.log(error);
-    }
-  } else {
-    window.alert('Please check your Token it is less that 50 ')
-  }
-}
-
-/// Write method ka Deposit-eth function
-
-const [ DepositTokens , setDepositTokens] = useState();
-const handleDeposit = (e) =>{
-   setDepositTokens(e.target.value)
-}
-
-const ClickDepositEth = async() =>{
-    if(DepositTokens >= 20){
         try {
-            const provider = await new ethers.providers.Web3Provider(window.ethereum) ;
+            const provider = await new ethers.providers.Web3Provider(window.ethereum);
             const signer = await provider.getSigner();
-            const daiContract = await new ethers.Contract(Contract_Address,SmartContractABI,signer)
-            let Eth = await daiContract.DepositEth(DepositTokens)
-            console.log(Eth);
-          } catch (error) {
+            const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+            let deposit = await daiContract.DepositedTokens(accountAddress);
+            let decimal = deposit.toString();
+            console.log(decimal);
+            setreadDepositedTokens(decimal)
+
+        } catch (error) {
             console.log(error);
-          }
+        }
     }
-    else{
-        window.alert('Token must be Greater than 20')
+
+    // Contract Function Conponent Data and functions Write method ka Withdraw token
+
+    const [withdrawAddress, setWithdrawAddress] = useState('');
+    const [withdrawTokens, setWithdrawTokens] = useState('');
+    const handleWithdraw = (e) => {
+        setWithdrawAddress(e.target.value);
     }
-}
+    const handleTokens = (e) => {
+        setWithdrawTokens(e.target.value)
+    }
+    const ClickWithdrawFunction = async (e) => {
+        e.preventDefault();
+
+        if (withdrawTokens >= 50) {
+            try {
+                const provider = await new ethers.providers.Web3Provider(window.ethereum);
+                const signer = await provider.getSigner();
+                const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+                console.log(daiContract);
+                console.log(withdrawAddress);
+                console.log(withdrawTokens);
+                let withdraw = await daiContract.withdrawTokens(withdrawAddress, withdrawTokens);
+                withdraw.wait()
+                console.log(withdraw);
+                toast.success('Token withdrawed successfully')
+
+            } catch (error) {
+                console.log(error);
+                toast.warn('Token withdrawed failed')
+            }
+        } else {
+            toast.info('Please check your Token it is less that 50 ')
+        }
+    }
+
+    /// Write method ka Deposit-eth function
+
+    const [DepositTokens, setDepositTokens] = useState();
+    const handleDeposit = (e) => {
+        setDepositTokens(e.target.value)
+    }
+
+    const ClickDepositEth = async (e) => {
+        e.preventDefault()
+        if (DepositTokens >= 20) {
+            try {
+                const provider = await new ethers.providers.Web3Provider(window.ethereum);
+                const signer = await provider.getSigner();
+                const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer)
+                let Eth = await daiContract.DepositEth(DepositTokens)
+                console.log(Eth);
+                toast.success('Token Deposit Successfully')
+            } catch (error) {
+                console.log(error);
+                toast.warn('Token Deposit Failed')
+            }
+        }
+        else {
+            toast.info('Token must be Greater than 20')
+        }
+    }
+
+    /// Bet Function Write Method ka 
+    const [bettoken, setBetToken] = useState('')
+    const [isHead, setIsHead] = useState(false);
+    const TimesProfit = 2;
+    let userAddress = accountAddress;
+
+
+    const handleBetToken = (e) => {
+        setBetToken(e.target.value)
+    }
+
+    const clickHeadOrTail = async () => {
+
+        if (bettoken >= 1) {
+            try {
+                const provider = await new ethers.providers.Web3Provider(window.ethereum)
+                const signer = await provider.getSigner();
+                const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+                let bet = await daiContract.Bet(userAddress, bettoken, TimesProfit, isHead);
+                console.log(userAddress, bettoken, TimesProfit, isHead);
+                console.log(bet);
+                toast.success('Transaction Successful')
+                return true
+            } catch (error) {
+                toast.warn('Transaction Failed')
+                console.log(error);
+            }
+        } else {
+            toast.warn('Enter a Valid Value');
+        }
+    }
+
+    // -------------------------------------------------------
+
+    /// GetTransactionHistory - read method ka
+
+    const [ transactionList , setTransactionList ] = useState([]);
+    console.log(transactionList);
+
+    const getTransactions = async () =>{
+ 
+        try {
+            const provider = await new ethers.providers.Web3Provider(window.ethereum);
+            const signer = await provider.getSigner();
+            const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+            let transactions = await daiContract.GetTransactionHistory()
+            setTransactionList(transactions)
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() =>{
+        getTransactions()
+    },[accountAddress])
+
+    // ----------------------------------------------------------
 
     return (
         <ContractFunctionsContext.Provider value={{
@@ -163,7 +231,11 @@ const ClickDepositEth = async() =>{
             handleTokens,
             ClickWithdrawFunction,
             handleDeposit,
-            ClickDepositEth
+            ClickDepositEth,
+            handleBetToken,
+            setIsHead,
+            clickHeadOrTail,
+            bettoken
         }}>
             {children}
         </ContractFunctionsContext.Provider>

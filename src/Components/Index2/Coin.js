@@ -3,43 +3,69 @@ import { Link } from 'react-router-dom';
 import './Coin.css'
 import front from '../../Assets/head.jpg'
 import back from '../../Assets/back.jpg'
+import { useContext } from 'react';
+import { ContractFunctionsContext } from '../Utils/ContractFunctions';
+import { Web3WalletContext } from '../../Context/UseContext';
+import { toast } from 'react-toastify';
 
 export default function Coin() {
 
-    let heads = 0;
-    let tails = 0;
-
-
-
+    const [head, setHead] = useState(0);
+    const [tail, setTail] = useState(0);
     const [coin, setCoin] = useState('');
+    const [disable, setDisable] = useState(false);
 
-    const flipButton = () => {
 
-        let i = Math.floor(Math.random() * 2);
-        coin.style.animation = "none";
-        if (i) {
-            setTimeout(() => {
-                coin.style.animation = "spin-heads 3s forwards";
-            }, 100);
-            heads++;
+
+    const showError = (e) => {
+        e.preventDefault();
+        if (userConnected == false) {
+
+            toast.warn('Connect Your Wallet First');
+        } else if (bettoken < 1) {
+            toast.info('Amount must be greater than 1')
         }
-        else {
-            setTimeout(() => {
-                coin.style.animation = "spin-tails 3s forwards";
-            }, 100);
-            tails++;
-        }
-        setTimeout(updateStats, 3000);
-        // disableButton();
-
     }
 
-    const resetButton = () => {
+    const flipButton = async (e) => {
+        e.preventDefault();
 
-        coin.style.animation = "none";
-        heads = 0;
-        tails = 0;
-        updateStats();
+        let batt = await clickHeadOrTail();
+
+        if (batt == true) {
+            let i = Math.floor(Math.random() * 10);
+            setDisable(true)
+            coin.style.animation = "none";
+            if (i%2 == 0) {
+                setTimeout(() => {
+                    coin.style.animation = "spin-heads 3s forwards";
+                }, 100);
+                setTimeout(() => {
+                    setHead(head + 1);
+                    setDisable(false)
+                }, 3000);
+                setIsHead(true)
+            }
+            else {
+                setTimeout(() => {
+                    coin.style.animation = "spin-tails 3s forwards";
+                }, 100);
+                setTimeout(() => {
+                    setTail(tail + 1);
+                    setDisable(false)
+                }, 3000);
+                setIsHead(false)
+            }
+            setTimeout(3000);
+        }
+    }
+
+    const resetButton = (e) => {
+        e.preventDefault();
+
+        // coin.style.animation = "none";
+        setHead(0);
+        setTail(0);
 
     }
     useEffect(() => {
@@ -47,21 +73,19 @@ export default function Coin() {
         setCoin(coin)
 
     }, [])
-    function updateStats() {
-        document.querySelector("#heads-count").textContent = `Heads: ${heads}`;
-        document.querySelector("#tails-count").textContent = `Tails: ${tails}`;
-    }
-    // function disableButton(){
-    //     flipBtn.disabled = true;
-    //     setTimeout(function(){
-    //         flipBtn.disabled = false;
-    //     },3000);
-    // }
 
-    const [token, setToken] = useState('')
-    const handleChange = (e) => {
-        setToken(e.target.value)
-    }
+
+
+    const {
+        userConnected
+    } = useContext(Web3WalletContext)
+
+    const {
+        handleBetToken,
+        setIsHead,
+        clickHeadOrTail,
+        bettoken
+    } = useContext(ContractFunctionsContext)
 
     return (
 
@@ -86,38 +110,45 @@ export default function Coin() {
                 </div> */}
             </div>
             <div className="container-coin">
-                <h1></h1>
-                <div className="coin-main" id="coin">
-                    <div className="heads-img">
-                        {/* <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" /> */}
-                        <img src={front} />
+
+                <form >
+                    <h1></h1>
+                    <div className="coin-main" id="coin">
+                        <div className="heads-img">
+                            <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" />
+                            {/* <img src={front} /> */}
+                        </div>
+                        <div className="tails-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPXdeMWZbX3Vk9Qc3tgGtERTCZNe5z1OyzXN8ZejoIrXgA95Wi4mfTV3BgGr0lGHO5I4&usqp=CAU" />
+                            {/* <img src={back} /> */}
+                        </div>
                     </div>
-                    <div className="tails-img">
-                        {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPXdeMWZbX3Vk9Qc3tgGtERTCZNe5z1OyzXN8ZejoIrXgA95Wi4mfTV3BgGr0lGHO5I4&usqp=CAU" /> */}
-                        <img src={back} />
+                    <div className=''>
+
+
+                        <p>
+                            <label htmlFor="token">Amount</label>
+                            <input name='token' required={true} type="number" className='form-control ' onChange={handleBetToken} placeholder='Enter Amount in Token' />
+                        </p>
                     </div>
-                </div>
-                <div className=''>
 
-                    <p className='m-0'>Amount</p>
-                    <p>
-                        <input type="text" className='form-control ' onChange={handleChange} placeholder='Enter Amount in Token' />
-                    </p>
-                </div>
+                    <div className="stats">
+                        <p id="heads-count" >Heads: {head}</p>
+                        <p id="tails-count">Tails: {tail}</p>
+                    </div>
 
-                <div className="stats">
-                    <p id="heads-count" >Heads: 0</p>
-                    <p id="tails-count">Tails: 0</p>
-                </div>
+                    <div className="buttons-main">
+                        <button className='button-btn' id="flip-button" disabled={disable} onClick={
 
-                <div className="buttons-main">
-                    <button className='button-btn' id="flip-button" onClick={flipButton}>
-                        Flip Coin
-                    </button>
-                    <button className='button-btn' id="reset-button" onClick={resetButton}>
-                        Reset
-                    </button>
-                </div>
+                            userConnected == true && bettoken >= 1 ? flipButton : showError
+                        }>
+                            Flip Coin
+                        </button>
+                        <button className='button-btn' id="reset-button" onClick={resetButton}>
+                            Reset
+                        </button>
+                    </div>
+                </form>
             </div>
         </>
     )
