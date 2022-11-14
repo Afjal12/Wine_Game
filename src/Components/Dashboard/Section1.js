@@ -24,7 +24,7 @@ export default function Section1() {
     return (
         <>
 
-            <div className='d-flex justify-content-between w-100 dashboard-body section1-body pt-3' >
+            <div title='User Detail' className='d-flex justify-content-between w-100 dashboard-body section1-body pt-3' >
 
                 
                 <p className='col-md-5 token-border ' >

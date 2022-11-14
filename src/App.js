@@ -9,6 +9,8 @@ import ContractFunctions from './Components/Utils/ContractFunctions';
 import Dashboard from './Components/Dashboard/Dashboard';
 import BuyToken from './Components/BuyToken/BuyToken';
 import Coin from './Components/Index2/Coin';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -23,13 +25,25 @@ function App() {
 
               <Route path='' element={<Dashboard />} />
               <Route path='bet' element={<Game />} />
-              <Route path='coin' element={<Coin /> } />
+              <Route path='coin' element={<Coin />} />
               <Route path='buy-token' element={<BuyToken />} />
 
 
 
             </Route>
           </Routes>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </Router>
       </ContractFunctions>
     </MetamskConnect>
