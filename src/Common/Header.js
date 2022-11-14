@@ -14,7 +14,7 @@ const { example,userConnected,accountAddress,walletConnected,ProvidermetamaskLog
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">Dashboard</Link>
+          <Link className="navbar-brand" to="/">King-Bet</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -22,6 +22,9 @@ const { example,userConnected,accountAddress,walletConnected,ProvidermetamaskLog
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/bet">Bet</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/coin">Coin</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/buy-token">Buy Token</Link>
