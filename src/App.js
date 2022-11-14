@@ -8,6 +8,7 @@ import MetamskConnect from './Context/UseContext';
 import ContractFunctions from './Components/Utils/ContractFunctions';
 import Dashboard from './Components/Dashboard/Dashboard';
 import BuyToken from './Components/BuyToken/BuyToken';
+import Coin from './Components/Index2/Coin';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
               <Route path='' element={<Dashboard />} />
               <Route path='bet' element={<Game />} />
+              <Route path='coin' element={<Coin /> } />
               <Route path='buy-token' element={<BuyToken />} />
 
 

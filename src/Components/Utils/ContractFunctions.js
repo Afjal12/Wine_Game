@@ -93,7 +93,7 @@ export default function ContractFunctions({ children }) {
        }
     }
 
-// Contract Function Conponent Data and functions
+// Contract Function Conponent Data and functions Write method ka Withdraw token
 
 const [withdrawAddress , setWithdrawAddress ] = useState('');
 const [withdrawTokens , setWithdrawTokens] = useState('');
@@ -105,6 +105,7 @@ const handleTokens = (e) => {
 }
 const ClickWithdrawFunction =async () => {
  
+  if (withdrawTokens >= 50) {
     try {
         const provider = await new ethers.providers.Web3Provider(window.ethereum);
         const signer = await provider.getSigner();
@@ -112,17 +113,41 @@ const ClickWithdrawFunction =async () => {
         console.log(daiContract);
         console.log(withdrawAddress);
         console.log(withdrawTokens);
-        let withdraw = await daiContract.withdrawTokens(withdrawAddress,{
-            value : parseEther(withdrawTokens)
-        }
-        );
+        let withdraw = await daiContract.withdrawTokens(withdrawAddress,withdrawTokens);
+        withdraw.wait()
         console.log(withdraw);
     
     } catch (error) {
         console.log(error);
     }
+  } else {
+    window.alert('Please check your Token it is less that 50 ')
+  }
 }
 
+/// Write method ka Deposit-eth function
+
+const [ DepositTokens , setDepositTokens] = useState();
+const handleDeposit = (e) =>{
+   setDepositTokens(e.target.value)
+}
+
+const ClickDepositEth = async() =>{
+    if(DepositTokens >= 20){
+        try {
+            const provider = await new ethers.providers.Web3Provider(window.ethereum) ;
+            const signer = await provider.getSigner();
+            const daiContract = await new ethers.Contract(Contract_Address,SmartContractABI,signer)
+            let Eth = await daiContract.DepositEth(DepositTokens)
+            console.log(Eth);
+          } catch (error) {
+            console.log(error);
+          }
+    }
+    else{
+        window.alert('Token must be Greater than 20')
+    }
+}
 
     return (
         <ContractFunctionsContext.Provider value={{
@@ -136,7 +161,9 @@ const ClickWithdrawFunction =async () => {
             handleSetMatic,
             handleWithdraw,
             handleTokens,
-            ClickWithdrawFunction
+            ClickWithdrawFunction,
+            handleDeposit,
+            ClickDepositEth
         }}>
             {children}
         </ContractFunctionsContext.Provider>

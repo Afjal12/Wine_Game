@@ -1,19 +1,31 @@
 import React from 'react'
 import { useContext } from 'react'
+import { Web3WalletContext } from '../../Context/UseContext'
 import Transaction from '../Transactions/Transaction'
 import { ContractFunctionsContext } from '../Utils/ContractFunctions'
 import './Dashboard.css'
 
 export default function WidhdrawToken() {
 
-    const {handleWithdraw , ClickWithdrawFunction,handleTokens} = useContext(ContractFunctionsContext);
+    const {
+        handleWithdraw,
+        ClickWithdrawFunction,
+        handleTokens,
+        readBalanceOf,
+        readDepositedTokens
+    } = useContext(ContractFunctionsContext);
+    const {
+        networkName,
+        userConnected
+    } = useContext(Web3WalletContext)
+
     return (
         <>
 
             <div className='d-flex dashboard-body  justify-content-between'>
                 <div className='col-md-5  font-token p-4 token-border  '>
                     <h1 className='text-center text-primary'>Withdraw Token</h1>
-                    <p>Network : Matic</p>
+                    <p>Network : {userConnected == true ? networkName : 'Connect your wallet First'}</p>
                     <span>Address</span><br />
                     <p>
 
@@ -28,12 +40,12 @@ export default function WidhdrawToken() {
 
                         <p className='w-50'>
                             <span className='span-bold'>Total Tokens</span><br />
-                            <span>97000008</span>
+                            <span>{userConnected ? readBalanceOf : '-'}</span>
 
                         </p>
                         <p className='w-50'>
                             <span className='span-bold'>Total Withdrawable token</span><br />
-                            <span>97000008</span>
+                            <span>{userConnected ? readDepositedTokens : '-'}</span>
 
                         </p>
 
@@ -42,12 +54,12 @@ export default function WidhdrawToken() {
 
                         <p className='w-50'>
                             <span className='span-bold'>Minimum Withdrable token</span><br />
-                            <span>97000008</span>
+                            <span>50</span>
 
                         </p>
                         <p className='w-50'>
-                            <span className='span-bold'>Transfer fee 2.5%</span><br />
-                            <span>97000008</span>
+                            <span className='span-bold'>Withdraw token fee</span><br />
+                            <span>3 %</span>
 
                         </p>
 

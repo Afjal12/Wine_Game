@@ -5,6 +5,7 @@ import Section1 from './Section1'
 import WidhdrawToken from './WidhdrawToken'
 import './Dashboard.css'
 import Transaction from '../Transactions/Transaction'
+import DepositEth from './DepositEth'
 
 export default function Dashboard() {
   return (
@@ -26,6 +27,7 @@ export default function Dashboard() {
       </div>
       <Section1 />
       <WidhdrawToken />
+      <DepositEth />
       {/* <BuyToken /> */}
       {/* <Transaction /> */}
     </>
