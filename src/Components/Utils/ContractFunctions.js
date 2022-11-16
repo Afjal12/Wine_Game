@@ -195,7 +195,10 @@ export default function ContractFunctions({ children }) {
     /// GetTransactionHistory - read method ka
 
     const [ transactionList , setTransactionList ] = useState([]);
+
     console.log(transactionList);
+    
+
 
     const getTransactions = async () =>{
  
@@ -235,6 +238,7 @@ export default function ContractFunctions({ children }) {
             handleBetToken,
             setIsHead,
             clickHeadOrTail,
+            transactionList,
             bettoken
         }}>
             {children}

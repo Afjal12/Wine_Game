@@ -317,8 +317,20 @@ const Game = ({ id, owned, close, expires }) => {
 
 
 
-    const { userConnected, accountAddress, walletConnected, ProvidermetamaskLogin, disconnectUser, getMetamaskAccount, WalletBalance, networkName } = useContext(Web3WalletContext);
-    const { readBalanceOf, readDepositedTokens } = useContext(ContractFunctionsContext)
+    const {
+        userConnected,
+        accountAddress,
+        walletConnected,
+        ProvidermetamaskLogin,
+        disconnectUser,
+        getMetamaskAccount,
+        WalletBalance,
+        networkName
+    } = useContext(Web3WalletContext);
+    const {
+        readBalanceOf,
+        readDepositedTokens
+    } = useContext(ContractFunctionsContext)
 
     // console.log('UserConnected', userConnected);
     // console.log('AccountAddress', accountAddress);
@@ -335,11 +347,11 @@ const Game = ({ id, owned, close, expires }) => {
                 <div className="pagetitle text-light">
                     <div className='w-25 mx-5 py-5 '>
 
-                        <h1 style={{color: 'rgba(255, 255, 255, 0.781)'}}>Bet Game</h1>
+                        <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Bet Game</h1>
                         <nav>
                             <ol className="breadcrumb m-0">
                                 <li className="breadcrumb-item active">
-                                    <Link to="/"  style={{textDecoration: 'none'}}>Dashboard</Link>
+                                    <Link to="/" style={{ textDecoration: 'none' }}>Dashboard</Link>
                                 </li>
                                 <li className="breadcrumb-item ">Bet</li>
                                 {/* <li className="breadcrumb-item active">Profile</li> */}
@@ -400,12 +412,12 @@ const Game = ({ id, owned, close, expires }) => {
 
                         </div>
                         <h1 className="price">{"Available cash: " + Math.round((balance * 100)) / 100 + "$"}</h1>
+                        {/* <h1 className="price">{"Available cash: " + readBalanceOf+ "$"}</h1> */}
                         <button onClick={() => setBalance(balance + 1000)} className="buyMoreButton">Add 1000 $</button>
                     </div>
 
                 </div>
-                {/* <BuyToken /> */}
-                {/* <Transaction /> */}
+              
             </section>
 
 

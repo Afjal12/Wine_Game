@@ -36,7 +36,7 @@ export default function Coin() {
             let i = Math.floor(Math.random() * 10);
             setDisable(true)
             coin.style.animation = "none";
-            if (i%2 == 0) {
+            if (i % 2 == 0) {
                 setTimeout(() => {
                     coin.style.animation = "spin-heads 3s forwards";
                 }, 100);
@@ -84,9 +84,14 @@ export default function Coin() {
         handleBetToken,
         setIsHead,
         clickHeadOrTail,
-        bettoken
+        bettoken,
+        // setcheck1
     } = useContext(ContractFunctionsContext)
 
+    const [check1 , setcheck1] = useState(false);
+    // const [check2 , setcheck2] = useState(false);
+    // console.log(check1);
+    // console.log(check2);
     return (
 
         <>
@@ -100,14 +105,9 @@ export default function Coin() {
                                 <Link to="/" style={{ textDecoration: 'none' }}>Dashboard</Link>
                             </li>
                             <li className="breadcrumb-item ">Coin</li>
-                            {/* <li className="breadcrumb-item active">Profile</li> */}
                         </ol>
                     </nav>
                 </div>
-                {/* <div>
-                    <p>Wallet Address : 0xe0517dae147514e90ccfeed48e053a4a186a9348</p>
-                    <p>Token Balance : 214831438</p>
-                </div> */}
             </div>
             <div className="container-coin">
 
@@ -115,11 +115,11 @@ export default function Coin() {
                     <h1></h1>
                     <div className="coin-main" id="coin">
                         <div className="heads-img">
-                            <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPXdeMWZbX3Vk9Qc3tgGtERTCZNe5z1OyzXN8ZejoIrXgA95Wi4mfTV3BgGr0lGHO5I4&usqp=CAU" />
                             {/* <img src={front} /> */}
                         </div>
                         <div className="tails-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPXdeMWZbX3Vk9Qc3tgGtERTCZNe5z1OyzXN8ZejoIrXgA95Wi4mfTV3BgGr0lGHO5I4&usqp=CAU" />
+                            <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" />
                             {/* <img src={back} /> */}
                         </div>
                     </div>
@@ -132,9 +132,17 @@ export default function Coin() {
                         </p>
                     </div>
 
-                    <div className="stats">
+                    <div className="stats d-flex justify-content-between">
                         <p id="heads-count" >Heads: {head}</p>
                         <p id="tails-count">Tails: {tail}</p>
+                        {/* <div className="form-check">
+                            <input className="form-check-input " type="radio" onBlur={() => setcheck1(false)} name="flexRadioDefault" id="flexRadioDefault1" />
+                            <label className="form-check-label mx-2" htmlFor="flexRadioDefault1">Heads: {head}</label>
+                        </div>
+                        <div className="form-check">
+                            <input className="form-check-input " type="radio" onBlur={() => setcheck1(true)} name="flexRadioDefault" id="flexRadioDefault2"  />
+                            <label className="form-check-label mx-2" htmlFor="flexRadioDefault2">Tails: {tail}</label>
+                        </div> */}
                     </div>
 
                     <div className="buttons-main">
