@@ -27,7 +27,7 @@ export const Login = () => {
     return (
 
         <>
-            <div className="container d-flex min-vh-100 ">
+            <div className="container-fluid d-flex min-vh-100 login-body">
                 <div className="d-flex justify-content-center h-100 mx-auto my-auto">
                     <div className="user_card">
                         <div className="d-flex justify-content-center">

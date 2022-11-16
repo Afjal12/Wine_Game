@@ -43,7 +43,7 @@ export default function BuyToken() {
                     <nav>
                         <ol className="breadcrumb m-0">
                             <li className="breadcrumb-item active">
-                                <Link to="/" style={{textDecoration: 'none'}}>dashboard</Link>
+                                <Link to="/dashboard" style={{textDecoration: 'none'}}>dashboard</Link>
                             </li>
                             <li className="breadcrumb-item ">Buy-Token</li>
                             {/* <li className="breadcrumb-item active">Profile</li> */}

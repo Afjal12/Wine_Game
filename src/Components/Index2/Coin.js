@@ -7,6 +7,7 @@ import { useContext } from 'react';
 import { ContractFunctionsContext } from '../Utils/ContractFunctions';
 import { Web3WalletContext } from '../../Context/UseContext';
 import { toast } from 'react-toastify';
+import TableTransaction from './TableTransaction';
 
 export default function Coin() {
 
@@ -77,7 +78,7 @@ export default function Coin() {
 
 
     const {
-        userConnected
+        userConnected,
     } = useContext(Web3WalletContext)
 
     const {
@@ -85,57 +86,63 @@ export default function Coin() {
         setIsHead,
         clickHeadOrTail,
         bettoken,
+        readBalanceOf,
         // setcheck1
     } = useContext(ContractFunctionsContext)
 
-    const [check1 , setcheck1] = useState(false);
+    const [check1, setcheck1] = useState(false);
     // const [check2 , setcheck2] = useState(false);
     // console.log(check1);
     // console.log(check2);
     return (
 
         <>
-            <div className="pagetitle text-light" style={{ background: '#072333', color: 'rgba(255, 255, 255, 0.781)' }}>
-                <div className='w-25 mx-5 py-5 '>
+            <div className='min-vh-100'>
+                <div className="pagetitle text-light" style={{ background: '#072333', color: 'rgba(255, 255, 255, 0.781)' }}>
+                    <div className=' mx-5 py-5 '>
 
-                    <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Coin Game</h1>
-                    <nav>
-                        <ol className="breadcrumb m-0">
-                            <li className="breadcrumb-item active">
-                                <Link to="/" style={{ textDecoration: 'none' }}>Dashboard</Link>
-                            </li>
-                            <li className="breadcrumb-item ">Coin</li>
-                        </ol>
-                    </nav>
+                        <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Coin Game</h1>
+                        <nav>
+                            <ol className="breadcrumb m-0">
+                                <li className="breadcrumb-item active">
+                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
+                                </li>
+                                <li className="breadcrumb-item ">Coin</li>
+                            </ol>
+                        </nav>
+                    </div>
                 </div>
-            </div>
-            <div className="container-coin">
 
-                <form >
-                    <h1></h1>
-                    <div className="coin-main" id="coin">
-                        <div className="heads-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPXdeMWZbX3Vk9Qc3tgGtERTCZNe5z1OyzXN8ZejoIrXgA95Wi4mfTV3BgGr0lGHO5I4&usqp=CAU" />
-                            {/* <img src={front} /> */}
+
+
+
+                <div className="container-coin col-md-6 mx-auto">
+                    <form >
+                        {/* <p className='text-center  bet-text m-0'>Balance : {userConnected == true ? <span className='bet-text'> {readBalanceOf + ' token'}</span> : ''} </p> */}
+                        <div className="coin-main" id="coin">
+
+                            <div className="heads-img">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKPXdeMWZbX3Vk9Qc3tgGtERTCZNe5z1OyzXN8ZejoIrXgA95Wi4mfTV3BgGr0lGHO5I4&usqp=CAU" />
+                                {/* <img src={front} /> */}
+                            </div>
+                            <div className="tails-img">
+                                <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" />
+                                {/* <img src={back} /> */}
+                            </div>
                         </div>
-                        <div className="tails-img">
-                            <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" />
-                            {/* <img src={back} /> */}
+                        <div className=''>
+
+
+                            <p>
+                                <label htmlFor="token">Amount</label>
+                                <input name='token' required={true} type="number" className='form-control ' onChange={handleBetToken} placeholder='Enter Amount in Token' />
+                            </p>
                         </div>
-                    </div>
-                    <div className=''>
 
-
-                        <p>
-                            <label htmlFor="token">Amount</label>
-                            <input name='token' required={true} type="number" className='form-control ' onChange={handleBetToken} placeholder='Enter Amount in Token' />
-                        </p>
-                    </div>
-
-                    <div className="stats d-flex justify-content-between">
-                        <p id="heads-count" >Heads: {head}</p>
-                        <p id="tails-count">Tails: {tail}</p>
-                        {/* <div className="form-check">
+                        <div className="stats d-flex justify-content-between">
+                            <p id="heads-count" >Heads: {head}</p>
+                            <p id="tails-count">Tails: {tail}</p>
+                            {/* <div className="form-check">
                             <input className="form-check-input " type="radio" onBlur={() => setcheck1(false)} name="flexRadioDefault" id="flexRadioDefault1" />
                             <label className="form-check-label mx-2" htmlFor="flexRadioDefault1">Heads: {head}</label>
                         </div>
@@ -143,21 +150,34 @@ export default function Coin() {
                             <input className="form-check-input " type="radio" onBlur={() => setcheck1(true)} name="flexRadioDefault" id="flexRadioDefault2"  />
                             <label className="form-check-label mx-2" htmlFor="flexRadioDefault2">Tails: {tail}</label>
                         </div> */}
-                    </div>
+                        </div>
 
-                    <div className="buttons-main">
-                        <button className='button-btn' id="flip-button" disabled={disable} onClick={
+                        <div className="buttons-main">
+                            <button className='button-btn' id="flip-button" disabled={disable} onClick={
 
-                            userConnected == true && bettoken >= 1 ? flipButton : showError
-                        }>
-                            Flip Coin
-                        </button>
-                        <button className='button-btn' id="reset-button" onClick={resetButton}>
-                            Reset
-                        </button>
-                    </div>
-                </form>
+                                userConnected == true && bettoken >= 1 ? flipButton : showError
+                            }>
+                                Flip Coin
+                            </button>
+                            <button className='button-btn' id="reset-button" onClick={resetButton}>
+                                Reset
+                            </button>
+                        </div>
+                        <div className="buttons-main my-2 ">
+                            
+                            <p  id="flip-button-two" className='button-btn text-center m-0'>Balance : {userConnected == true ? <span > {readBalanceOf}</span> : ''} </p>
+
+                            <Link to='/buy-token'>
+                            <button className='button-btn' id="reset-button-two" >
+                                Buy Token
+                            </button>
+                            </Link>
+                            
+                        </div>
+                    </form>
+                </div>
             </div>
+            <TableTransaction />
         </>
     )
 }

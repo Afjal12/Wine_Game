@@ -25,7 +25,7 @@ export const Forgot = () => {
     }
     return (
         <>
-            <div className="container d-flex min-vh-100">
+            <div className="container-fluid login-body d-flex min-vh-100">
                 <div className="d-flex justify-content-center h-100 mx-auto my-auto">
                     <div className="user_card">
                         <div className="d-flex justify-content-center">
