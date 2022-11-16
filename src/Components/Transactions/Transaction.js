@@ -1,65 +1,75 @@
 import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useContext } from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
+import { Web3WalletContext } from '../../Context/UseContext';
+import { ContractFunctionsContext } from '../Utils/ContractFunctions';
 
 export default function Transaction() {
   createTheme('solarized', {
-  text: {
-    primary: '#268bd2',
-    secondary: '#2aa198',
-  },
-  background: {
-    default: '#002b36',
-  },
-  context: {
-    background: '#cb4b16',
-    text: '#FFFFFF',
-  },
-  divider: {
-    default: '#073642',
-  },
-  action: {
-    button: 'rgba(0,0,0,.54)',
-    hover: 'rgba(0,0,0,.08)',
-    disabled: 'rgba(0,0,0,.12)',
-  },
-}, 'dark');
+    text: {
+      primary: '#268bd2',
+      secondary: '#2aa198',
+    },
+    background: {
+      default: '#002b36',
+    },
+    context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+    },
+    divider: {
+      default: '#073642',
+    },
+    action: {
+      button: 'rgba(0,0,0,.54)',
+      hover: 'rgba(0,0,0,.08)',
+      disabled: 'rgba(0,0,0,.12)',
+    },
+  }, 'dark');
+  const { transactionList } = useContext(ContractFunctionsContext);
+  const {userConnected} = useContext(Web3WalletContext);
   const columns = [
     {
-        name: 'Account Address',
-        selector: row => row.address,
+      name: 'Account Address',
+      selector: row => row.user,
     },
     {
-        name: 'Network',
-        selector: row => row.network
+      name: 'Bet Time',
+      selector: row => new Date(+row.BetTime.toString() * 1000).toDateString()
     },
     {
-        name: 'Token',
-        selector: row => row.token,
+      name: 'Bet Tokens',
+      selector: row => row.BetTokens.toString()
     },
-];
+    {
+      name: 'Won Tokens',
+      selector: row => row.WonTokens.toString()
+    }
+  ];
 
-const data = [
-    {
-        id: 1,
-        address: '0xb9B2c57e5428e31FFa21B302aEd689f4CA2447fE',
-        network: 'Mumbai',
-        token: '19838',
-    },
-    {
-        id: 2,
-        address: '0x1616d6D21859949b3d12C93DA6996b04c28dAF90',
-        network: 'Goerli',
-        token: '132235',
-    },
-]
 
   return (
-   <>
-   <div className='col-md-6 token-border' >
+    <>
+      <div className='col-md-6 token-border '  >
 
-   <DataTable subHeader subHeaderAlign='center' subHeaderComponent={<h2 className='text-primary'>Users Recent Transactions</h2>} columns={columns} data={data} theme='solarized'/>
-   </div>
-  
-   </>
+        <DataTable
+          subHeader
+          subHeaderAlign='center'
+          fixedHeader
+          fixedHeaderScrollHeight='25rem'
+          subHeaderComponent={<h2 className='text-primary'>Users Recent Transactions</h2>}
+          columns={columns}
+          data={userConnected == true ? transactionList :  ''}
+          theme='solarized'
+          pagination
+          highlightOnHover
+          style={{height : '100%'}}
+        />
+
+      </div>
+
+    </>
   )
 }

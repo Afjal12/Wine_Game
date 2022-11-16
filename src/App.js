@@ -11,6 +11,10 @@ import BuyToken from './Components/BuyToken/BuyToken';
 import Coin from './Components/Index2/Coin';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Login } from './Components/Login/Login';
+import { SignUp } from './Components/SignUp/SignUp';
+import { Forgot } from './Components/Forgot/Forgot';
+import Sidebar from './Common/Sidebar/Sidebar';
 
 function App() {
   return (
@@ -22,14 +26,15 @@ function App() {
           <Routes>
 
             <Route path='/' element={<ProtectedRoute />} >
+              <Route path='/' element={<Login />} />
+              <Route path='signup' element={<SignUp />} />
+              <Route path='forgot' element={<Forgot />} />
 
-              <Route path='' element={<Dashboard />} />
+              <Route path='dashboard' element={<Dashboard />} />
               <Route path='bet' element={<Game />} />
               <Route path='coin' element={<Coin />} />
               <Route path='buy-token' element={<BuyToken />} />
-
-
-
+              <Route path="sidebar" element={<Sidebar />} />
             </Route>
           </Routes>
           <ToastContainer
