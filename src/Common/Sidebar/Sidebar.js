@@ -5,7 +5,7 @@ import './Sidebar.css'
 export default function Sidebar() {
     const toggleSidebar = () => document.body.classList.toggle("open");
     return (
-        <div>
+        <div >
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -14,7 +14,8 @@ export default function Sidebar() {
             <div class="background"></div>
             <aside class="sidebar">
                 <button type="button">
-                    <i class="material-symbols-outlined">home</i>
+                    {/* <i class="material-symbols-outlined">home</i> */}
+                    <Link  class="material-symbols-outlined text-white" to="/dashboard">home</Link>
                     <span>Home</span>
                 </button>
                 <div>

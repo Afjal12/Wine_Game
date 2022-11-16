@@ -32,7 +32,7 @@ export const SignUp = () => {
     }
     return (
         <>
-            <div className="container d-flex min-vh-100">
+            <div className="container-fluid login-body d-flex min-vh-100">
                 <div className="d-flex justify-content-center mx-auto my-auto h-100">
                     <div className="user_card">
                         <div className="d-flex justify-content-center">
