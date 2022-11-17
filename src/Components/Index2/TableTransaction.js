@@ -79,7 +79,7 @@ action: {
     ]
 
     return (
-        <div className='col-md-10 d-flex mx-auto my-5' style={{
+        <div className='container d-flex mx-auto my-5' style={{
             borderRadius: '20px'            
         }}>
             <div className='w-100'>
