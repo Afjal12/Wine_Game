@@ -52,14 +52,14 @@ export default function Transaction() {
 
   return (
     <>
-      <div className='col-md-6 token-border '  >
+      <div className='card-width token-border '  >
 
         <DataTable
           subHeader
           subHeaderAlign='center'
           fixedHeader
           fixedHeaderScrollHeight='25rem'
-          subHeaderComponent={<h2 className='text-primary'>Users Recent Transactions</h2>}
+          subHeaderComponent={<h1 className='text-primary '>Users Recent Transactions</h1>}
           columns={columns}
           data={userConnected == true ? transactionList :  ''}
           theme='solarized'

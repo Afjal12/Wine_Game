@@ -17,7 +17,7 @@ export default function Dashboard() {
         <nav>
           <ol className="breadcrumb m-0">
             <li className="breadcrumb-item active">
-              <Link href="/dashboard" style={{textDecoration: 'none'}}>dashboard</Link>
+              <Link href="/" style={{textDecoration: 'none'}}>dashboard</Link>
             </li>
             {/* <li className="breadcrumb-item">Users</li> */}
             {/* <li className="breadcrumb-item active">Profile</li> */}

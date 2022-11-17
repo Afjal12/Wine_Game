@@ -23,7 +23,7 @@ export default function WidhdrawToken() {
         <>
 
             <div title='Withdraw Token' className='d-flex dashboard-body  justify-content-between'>
-                    <div className='col-md-5  font-token p-4 token-border  '>
+                    <div className='card-width  font-token p-4 token-border  '>
                 <form >
                         <h1 className='text-center text-primary'>Withdraw Token</h1>
                         <p>Network : {userConnected == true ? networkName : 'Connect your wallet First'}</p>

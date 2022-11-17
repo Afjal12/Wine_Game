@@ -24,11 +24,11 @@ export default function Section1() {
     return (
         <>
 
-            <div title='User Detail' className='d-flex justify-content-between w-100 dashboard-body section1-body pt-3' >
+            <div title='User Detail' className='d-flex  justify-content-between w-100 dashboard-body section1-body pt-3' >
 
                 
-                <p className='col-md-5 token-border ' >
-                    <h2 className='text-center text-primary'>User Detail</h2>
+                <p className=' token-border card-width px-4' >
+                    <h1 className='text-center text-primary'>User Detail</h1>
                     {userConnected == true ? '' : <p className='text-center text-danger'>Please connect your wallet First</p>}
                     <p > WalletAddress : {accountAddress ? accountAddress : '-'}</p>
                     <p > Balance : {WalletBalance ? WalletBalance : '-'}</p>
@@ -36,8 +36,8 @@ export default function Section1() {
                     <p>Token Balance : {userConnected == true ? readBalanceOf : '-'} </p>
                     <p>Deposited Tokens: {userConnected == true ? readDepositedTokens : '-'}</p>
                 </p>
-                <p className='col-md-6   token-border'>
-                    <h2 className='text-center text-primary'>Dummy Data</h2>
+                <p className='card-width  token-border px-4'>
+                    <h1 className='text-center text-primary'>Dummy Data</h1>
                     <p>No of buy token : 34872</p>
                     <p>Withdrawel amount : 32489230430 Token</p>
                     <p>Wins : 23456789</p>
