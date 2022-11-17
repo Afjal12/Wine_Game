@@ -14,9 +14,9 @@ export default function Header() {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light ">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/dashboard">
+          <Link className="navbar-brand" to="/">
 
-            <img src="https://cdn2.hubspot.net/hub/21989998/hubfs/Group%2057%20-%20Copy.png?width=108&height=108" style={{width: '2.5rem'}} alt="Logo" />
+            <img src="https://jkscoinworld.com/wp-content/uploads/2018/05/2013-a-1.jpg" style={{width: '2.5rem'}} alt="Logo" />
           </Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>

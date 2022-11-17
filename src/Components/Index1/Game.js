@@ -351,7 +351,7 @@ const Game = ({ id, owned, close, expires }) => {
                         <nav>
                             <ol className="breadcrumb m-0">
                                 <li className="breadcrumb-item active">
-                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
+                                    <Link to="/" style={{ textDecoration: 'none' }}>Dashboard</Link>
                                 </li>
                                 <li className="breadcrumb-item ">Bet</li>
                                 {/* <li className="breadcrumb-item active">Profile</li> */}

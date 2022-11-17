@@ -15,7 +15,7 @@ export default function Sidebar() {
             <aside class="sidebar">
                 <button type="button">
                     {/* <i class="material-symbols-outlined">home</i> */}
-                    <Link  class="material-symbols-outlined text-white" to="/dashboard">home</Link>
+                    <Link  class="material-symbols-outlined text-white" to="/">home</Link>
                     <span>Home</span>
                 </button>
                 <div>

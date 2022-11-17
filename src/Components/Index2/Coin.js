@@ -105,7 +105,7 @@ export default function Coin() {
                         <nav>
                             <ol className="breadcrumb m-0">
                                 <li className="breadcrumb-item active">
-                                    <Link to="/dashboard" style={{ textDecoration: 'none' }}>Dashboard</Link>
+                                    <Link to="/" style={{ textDecoration: 'none' }}>Dashboard</Link>
                                 </li>
                                 <li className="breadcrumb-item ">Coin</li>
                             </ol>
@@ -143,13 +143,13 @@ export default function Coin() {
                             <p id="heads-count" >Heads: {head}</p>
                             <p id="tails-count">Tails: {tail}</p>
                             {/* <div className="form-check">
-                            <input className="form-check-input " type="radio" onBlur={() => setcheck1(false)} name="flexRadioDefault" id="flexRadioDefault1" />
-                            <label className="form-check-label mx-2" htmlFor="flexRadioDefault1">Heads: {head}</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input " type="radio" onBlur={() => setcheck1(true)} name="flexRadioDefault" id="flexRadioDefault2"  />
-                            <label className="form-check-label mx-2" htmlFor="flexRadioDefault2">Tails: {tail}</label>
-                        </div> */}
+                                <input className="form-check-input " type="radio" onBlur={() => setcheck1(false)} name="flexRadioDefault" id="flexRadioDefault1" />
+                                <label className="form-check-label mx-2" htmlFor="flexRadioDefault1">Heads: {head}</label>
+                            </div>
+                            <div className="form-check">
+                                <input className="form-check-input " type="radio" onBlur={() => setcheck1(true)} name="flexRadioDefault" id="flexRadioDefault2" />
+                                <label className="form-check-label mx-2" htmlFor="flexRadioDefault2">Tails: {tail}</label>
+                            </div> */}
                         </div>
 
                         <div className="buttons-main">
@@ -164,15 +164,15 @@ export default function Coin() {
                             </button>
                         </div>
                         <div className="buttons-main my-2 ">
-                            
-                            <p  id="flip-button-two" className='button-btn text-center m-0'>Balance : {userConnected == true ? <span > {readBalanceOf}</span> : ''} </p>
+
+                            <p id="flip-button-two" className='button-btn text-center m-0'>Balance : {userConnected == true ? <span > {readBalanceOf}</span> : ''} </p>
 
                             <Link to='/buy-token'>
-                            <button className='button-btn' id="reset-button-two" >
-                                Buy Token
-                            </button>
+                                <button className='button-btn' id="reset-button-two" >
+                                    Buy Token
+                                </button>
                             </Link>
-                            
+
                         </div>
                     </form>
                 </div>
