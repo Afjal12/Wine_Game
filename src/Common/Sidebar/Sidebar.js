@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import UserDetail from '../../Components/Dashboard/UserDetail';
 import './Sidebar.css'
 
 export default function Sidebar() {
@@ -29,7 +30,8 @@ export default function Sidebar() {
                     </button>
                     <button type="button">
                         <i class="material-symbols-outlined">account_circle</i>
-                        <span>Account</span>
+                        {/* <span>Account</span> */}
+                        <span className='bg-dark ' style={{minWidth: '25vw'}}><UserDetail /></span>
                     </button>
                 </div>
                 <button type="button">
