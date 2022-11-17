@@ -20,8 +20,8 @@ body {
 
 .container-coin {
     background-color: #ffffff;
-    width: 400px;
-    padding: 35px;
+    /* width: 400px; */
+    padding: 25px;
     /* position: absolute; */
     /* transform: translate(-50%, -50%); */
     /* top: 50%; */

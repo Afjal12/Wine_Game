@@ -24,7 +24,7 @@ function App() {
 
             <Route path='/' element={<ProtectedRoute />} >
               <Route path='' element={<Dashboard />} />
-              <Route path='bet' element={<Game />} />
+              <Route path='casino-machine' element={<Game />} />
               <Route path='coin' element={<Coin />} />
               <Route path='buy-token' element={<BuyToken />} />
               <Route path="sidebar" element={<Sidebar />} />

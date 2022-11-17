@@ -13,13 +13,14 @@ export default function Section1() {
     return (
         <>
 
-            <div title='User Detail' className='d-flex  justify-content-between w-100 dashboard-body section1-body pt-3' >
+            <div title='User Detail' className='row d-flex flex-wrap justify-content-between w-100 dashboard-body section1-body pt-3' >
 
-                <p className=' token-border card-width px-4' >
+                <p className='  col-md-6 col-sm-12 gap-2 ' >
                     <UserDetail />
                 </p>
-                <Dummy />
-
+                <p className=' col-md-6 col-sm-12 gap-2  '>
+                    <Dummy />
+                </p>
             </div>
         </>
 

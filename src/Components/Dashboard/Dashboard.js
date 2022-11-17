@@ -1,11 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import BuyToken from '../BuyToken/BuyToken'
 import Section1 from './Section1'
-import WidhdrawToken from './WidhdrawToken'
 import './Dashboard.css'
-import Transaction from '../Transactions/Transaction'
-import DepositEth from './DepositEth'
+import Section2 from './Section2'
 
 export default function Dashboard() {
   return (
@@ -19,17 +16,12 @@ export default function Dashboard() {
             <li className="breadcrumb-item active">
               <Link href="/" style={{textDecoration: 'none'}}>dashboard</Link>
             </li>
-            {/* <li className="breadcrumb-item">Users</li> */}
-            {/* <li className="breadcrumb-item active">Profile</li> */}
           </ol>
         </nav>
       </div>
       </div>
       <Section1 />
-      <WidhdrawToken />
-      <DepositEth />
-      {/* <BuyToken /> */}
-      {/* <Transaction /> */}
+      <Section2 />
     </>
   )
 }

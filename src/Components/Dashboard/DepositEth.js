@@ -26,11 +26,12 @@ export default function DepositEth() {
     }
     return (
         <>
-            <div title='Deposit Eth' className='d-flex dashboard-body pt-3 justify-content-between'>
-                <div className='card-width  font-token p-4 token-border  '>
+        
+            <div title='Deposit Eth' id='deposit-token'  className=' dashboard-body pt-1 justify-content-between h-100'>
+                <div  className='card-width  font-token p-4 token-border  '>
                     <form>
-                        <h1 className='text-center text-primary'>Deposit Eth</h1>
-                        <p>Network : Matic</p>
+                        <h1 className='text-center  text-primary'>Deposit Token</h1>
+                        <p className='mt-5'>Network : Matic</p>
 
                         <span>Tokens</span><br />
                         <p>
