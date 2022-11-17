@@ -20,6 +20,8 @@ export default function UserDetail() {
     } = useContext(ContractFunctionsContext)
     return (
         <>
+        <div className='token-border p-3'>
+
             <h1 className='text-center text-primary'>User Detail</h1>
             {userConnected == true ? '' : <p className='text-center text-danger'>Please connect your wallet First</p>}
             <p > WalletAddress : {accountAddress ? accountAddress : '-'}</p>
@@ -27,6 +29,7 @@ export default function UserDetail() {
             <p>Network Name : {networkName ? networkName : '-'}</p>
             <p>Token Balance : {userConnected == true ? readBalanceOf : '-'} </p>
             <p>Deposited Tokens: {userConnected == true ? readDepositedTokens : '-'}</p>
+        </div>
         </>
     )
 }

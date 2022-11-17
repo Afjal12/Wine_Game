@@ -1,7 +1,6 @@
 import React from 'react'
 import { useContext } from 'react'
 import { Web3WalletContext } from '../../Context/UseContext'
-import Transaction from '../Transactions/Transaction'
 import { ContractFunctionsContext } from '../Utils/ContractFunctions'
 import './Dashboard.css'
 
@@ -22,9 +21,9 @@ export default function WidhdrawToken() {
     return (
         <>
 
-            <div title='Withdraw Token' className='d-flex dashboard-body  justify-content-between'>
-                    <div className='card-width  font-token p-4 token-border  '>
-                <form >
+            <div title='Withdraw Token' className=''>
+                <div className='card-width  font-token p-4 token-border  '>
+                    <form >
                         <h1 className='text-center text-primary'>Withdraw Token</h1>
                         <p>Network : {userConnected == true ? networkName : 'Connect your wallet First'}</p>
                         <span>Address</span><br />
@@ -70,9 +69,9 @@ export default function WidhdrawToken() {
                             <button className='btn btn-primary w-100' onClick={ClickWithdrawFunction}>Submit</button>
                         </p>
 
-                </form>
-                    </div>
-                <Transaction />
+                    </form>
+                </div>
+     
             </div>
         </>
     )

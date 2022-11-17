@@ -52,7 +52,7 @@ export default function Transaction() {
 
   return (
     <>
-      <div className='card-width token-border '  >
+      <div className=' h-100 token-border '  >
 
         <DataTable
           subHeader

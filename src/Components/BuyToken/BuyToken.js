@@ -34,9 +34,9 @@ export default function BuyToken() {
 
 
     return (
-        <section title='Buy Token' className='game-body'>
+        <section title='Buy Token' id='buy-token' className='game-body '>
 
-            <div className="pagetitle text-light">
+            {/* <div className="pagetitle text-light">
                 <div className='w-25 mx-5 py-5 '>
 
                     <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Buy Token</h1>
@@ -46,14 +46,12 @@ export default function BuyToken() {
                                 <Link to="/" style={{textDecoration: 'none'}}>dashboard</Link>
                             </li>
                             <li className="breadcrumb-item ">Buy-Token</li>
-                            {/* <li className="breadcrumb-item active">Profile</li> */}
                         </ol>
                     </nav>
                 </div>
-            </div>
-            <div className='m-0  p-0 text-white min-vh-100 d-flex'>
-
-                <div className='col-md-6 mx-auto my-auto p-3 ' style={{
+            </div> */}
+            <div className='m-0  p-0 text-white d-flex h-100'>
+                <div className='w-100  p-3 ' style={{
                     border: '2px solid #454cff',
                     borderRadius: '20px',
                 }}>
