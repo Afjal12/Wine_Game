@@ -102,10 +102,10 @@ export default function Coin() {
 
     const buyForm = () => {
         var x = document.getElementById('buy-token');
-        if (x.style.display === 'none') {
-            x.style.display = 'block';
-        } else {
+        if (x.style.display === 'block') {
             x.style.display = 'none';
+        } else {
+            x.style.display = 'block';
         }
     }
 
@@ -115,10 +115,10 @@ export default function Coin() {
 
     const DepositForm = () =>{
         var y = document.getElementById('deposit-token');
-        if (y.style.display === 'none') {
-            y.style.display = 'block';
-        } else {
+        if (y.style.display === 'block') {
             y.style.display = 'none';
+        } else {
+            y.style.display = 'block';
         }
     }
 

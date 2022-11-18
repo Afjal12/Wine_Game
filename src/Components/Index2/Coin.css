@@ -134,3 +134,9 @@ body {
 
 
 
+#buy-token{
+    display: none;
+}
+#deposit-token{
+    display: none;
+}
