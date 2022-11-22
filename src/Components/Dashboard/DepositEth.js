@@ -11,6 +11,10 @@ export default function DepositEth() {
         ClickDepositEth,
         readBalanceOf
     } = useContext(ContractFunctionsContext);
+    const ClickDeposit = (e) => {
+        e.preventDefault()
+        ClickDepositEth(e)
+    }
     const {
         userConnected
     } = useContext(Web3WalletContext)
@@ -22,13 +26,21 @@ export default function DepositEth() {
     }
     const showError = (e) => {
         e.preventDefault();
-        toast.info('Connect your wallet First')
+        if (userConnected == !true) {
+            toast.info('Connect your wallet First')
+        }
+        else if (+token < 20) {
+            toast.info('Amount must be greater that 20')
+        }
+        else if (+readBalanceOf < +token) {
+            toast.warn('Enter Amount is Invalid')
+        }
     }
     return (
         <>
-        
-            <div title='Deposit Eth' id='deposit-token'  className=' dashboard-body pt-1 justify-content-between h-100'>
-                <div  className='card-width  font-token p-4 token-border  '>
+
+            <div title='Deposit Eth' id='deposit-token' className=' dashboard-body pt-1 justify-content-between h-100'>
+                <div className='card-width  font-token p-4 token-border  '>
                     <form>
                         <h1 className='text-center  text-primary'>Deposit Token</h1>
                         <p className='mt-5'>Network : Matic</p>
@@ -62,10 +74,8 @@ export default function DepositEth() {
                             </p>
 
                         </div>
-
                         <p className='text-center'>
-
-                            <button className='btn btn-primary w-100' onClick={userConnected == true ? ClickDepositEth : showError}>Submit</button>
+                            <button className='btn btn-primary w-100' onClick={userConnected == true && +token >= 20 && +token <= +readBalanceOf ? ClickDeposit : showError}>Submit</button>
                         </p>
                     </form>
                 </div>

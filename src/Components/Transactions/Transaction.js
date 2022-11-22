@@ -55,13 +55,13 @@ export default function Transaction() {
       <div className=' h-100 token-border '  >
 
         <DataTable
+          columns={columns}
+          data={userConnected == true ? transactionList :  ''}
           subHeader
           subHeaderAlign='center'
           fixedHeader
           fixedHeaderScrollHeight='25rem'
           subHeaderComponent={<h1 className='text-primary '>Users Recent Transactions</h1>}
-          columns={columns}
-          data={userConnected == true ? transactionList :  ''}
           theme='solarized'
           pagination
           highlightOnHover

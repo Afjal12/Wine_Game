@@ -15,6 +15,7 @@ export default function MetamskConnect({ children }) {
   const [accountAddress, setAccountAddress] = useState("");
   const [walletConnected, setWalletConnected] = useState("");
   const [WalletBalance, setWalletBalance] = useState();
+  const [ WalletBalanceInNumber , setWalletBalanceInNumber] = useState();
   const [networkName , setNetworkName] = useState('')
   const onboarding = new MetaMaskOnboarding();
 
@@ -57,6 +58,7 @@ export default function MetamskConnect({ children }) {
     setWalletConnected("");
     setNetworkName('');
     setWalletBalance('');
+    setWalletBalanceInNumber('');
     localStorage.removeItem('wallet');
     // successPopup("Disconnected wallet")
   }
@@ -99,6 +101,7 @@ export default function MetamskConnect({ children }) {
         // Yarn add ethers for using ethers utils or
         // npm install ethers
         console.log('Metamask Balance Decimal value' ,ethers.utils.formatEther(balance))
+        setWalletBalanceInNumber(ethers.utils.formatEther(balance))
         if(window?.ethereum?.networkVersion == '80001'){
 
           setWalletBalance(ethers?.utils?.formatEther(balance) +' '+ 'MATIC') 
@@ -131,7 +134,8 @@ export default function MetamskConnect({ children }) {
         ProvidermetamaskLogin,
         disconnectUser,
         getMetamaskAccount,
-        WalletBalance
+        WalletBalance,
+        WalletBalanceInNumber,
       }} >
         {children}
       </Web3WalletContext.Provider>

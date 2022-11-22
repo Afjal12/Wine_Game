@@ -111,10 +111,7 @@ body {
     background-color: #053469;
     color: #ffffff;
 }
-#flip-button-two {
-    background-color: #2e135e;;
-    color: #ffffff;
-}
+
 
 #flip-button:disabled {
     background-color: #e1e0ee;
@@ -126,17 +123,6 @@ body {
     background-color: #674706;
     color: white;
 }
-#reset-button-two {
-    background-color: #7c2710;
-    color: white;
-}
 
 
 
-
-#buy-token{
-    display: none;
-}
-#deposit-token{
-    display: none;
-}

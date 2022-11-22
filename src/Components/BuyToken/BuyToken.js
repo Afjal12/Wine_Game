@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { ContractFunctionsContext } from '../Utils/ContractFunctions';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 export default function BuyToken() {
@@ -20,40 +21,34 @@ export default function BuyToken() {
         setToken,
         handleSetMatic
     } = useContext(ContractFunctionsContext);
-    const { userConnected, ProvidermetamaskLogin } = useContext(Web3WalletContext);
-
-
-
+    const { userConnected, ProvidermetamaskLogin,WalletBalanceInNumber } = useContext(Web3WalletContext);
 
     const handleMatic = (e) => {
         handleSetMatic(e)
     }
 
+    const showError = (e) =>{
+        e.preventDefault()
+        console.log('Jaadu');
+
+        if(+matic == 0){
+            toast.warn('Enter a greater than 0 amount')
+        }
+        else if(+matic > +WalletBalanceInNumber){
+            toast.warn('Insufficient Balance')
+        }
+    }
 
 
 
 
     return (
-        <section title='Buy Token' id='buy-token' className='game-body '>
+        <section title='Buy Token' id='buy-token' className='game-body  d-flex' >
 
-            {/* <div className="pagetitle text-light">
-                <div className='w-25 mx-5 py-5 '>
-
-                    <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Buy Token</h1>
-                    <nav>
-                        <ol className="breadcrumb m-0">
-                            <li className="breadcrumb-item active">
-                                <Link to="/" style={{textDecoration: 'none'}}>dashboard</Link>
-                            </li>
-                            <li className="breadcrumb-item ">Buy-Token</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div> */}
-            <div className='m-0  p-0 text-white d-flex h-100'>
+            <div className='m-0  p-0 text-white w-100 mx-auto my-auto '>
                 <div className='w-100  p-3 ' style={{
                     border: '2px solid #454cff',
-                    borderRadius: '20px',
+                    borderRadius: '10px',
                 }}>
                     <h1 className='token-border text-primary text-center mt-5'>Buy Token Form</h1>
                     <p className='text-center pt-2'> 1 Matic = 80 token</p>
@@ -89,7 +84,7 @@ export default function BuyToken() {
                         </div>
                         <p className='text-center mt-5'>
                             {userConnected == true ?
-                                <button className='btn btn-warning  ' onClick={getToken}>Buy Token</button>
+                                <button className='btn btn-warning  ' onClick={+matic >0 && +matic <= +WalletBalanceInNumber ?  getToken : showError}>Buy Token</button>
                                 :
                                 <button className='btn btn-primary' onClick={ProvidermetamaskLogin} >Connect Wallet</button>
                             }
