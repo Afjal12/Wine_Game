@@ -12,6 +12,8 @@ import Coin from './Components/Index2/Coin';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Sidebar from './Common/Sidebar/Sidebar';
+import Spinner from './Components/Index3/Spinner';
+import DepositEth from './Components/Dashboard/DepositEth';
 
 function App() {
   return (
@@ -27,7 +29,9 @@ function App() {
               <Route path='casino-machine' element={<Game />} />
               <Route path='coin' element={<Coin />} />
               <Route path='buy-token' element={<BuyToken />} />
+              <Route path='deposit-form' element={<DepositEth />} />
               <Route path="sidebar" element={<Sidebar />} />
+              <Route path="spin" element={<Spinner />} />
             </Route>
           </Routes>
           <ToastContainer

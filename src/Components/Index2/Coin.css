@@ -27,6 +27,7 @@ body {
     /* top: 50%; */
     /* left: 50%; */
     box-shadow: 15px 30px 35px rgba(0, 0, 0, 0.1);
+    /* background: linear-gradient(267.26deg,#c24fb6 6.59%,#3f51b8 94.04%); */
     border-radius: 10px;
     -webkit-perspective: 300px;
     perspective: 300px;
@@ -40,7 +41,7 @@ body {
     margin-bottom: 40px;
     margin-top: 15px;
     box-shadow: 0 0 20px rgba(0, 139, 253, 0.25);
-
+    border-radius: 10px;
 }
 
 .stats p:nth-last-child(1) {
@@ -58,6 +59,7 @@ body {
 
 .coin-main img {
     width: 145px;
+    border-radius: 200px;
 }
 
 .heads-img,
@@ -111,10 +113,7 @@ body {
     background-color: #053469;
     color: #ffffff;
 }
-#flip-button-two {
-    background-color: #2e135e;;
-    color: #ffffff;
-}
+
 
 #flip-button:disabled {
     background-color: #e1e0ee;
@@ -126,17 +125,6 @@ body {
     background-color: #674706;
     color: white;
 }
-#reset-button-two {
-    background-color: #7c2710;
-    color: white;
-}
 
 
 
-
-#buy-token{
-    display: none;
-}
-#deposit-token{
-    display: none;
-}

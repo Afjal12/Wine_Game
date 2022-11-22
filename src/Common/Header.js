@@ -29,6 +29,9 @@ export default function Header() {
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/coin">Coin flip</Link>
               </li>
+              {/* <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/spin">Spinner</Link>
+              </li> */}
             </ul>
             <form className="d-flex">
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />

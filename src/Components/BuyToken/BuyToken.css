@@ -3,3 +3,14 @@
     border-radius: 10px;
     padding: 5px;
 }
+.btn-close{
+    float: right;
+    font-size: 2rem;
+    color:red;
+    background: unset;
+}
+.btn-close:hover{
+    color:red;
+    opacity: .8;
+    border: unset;
+}

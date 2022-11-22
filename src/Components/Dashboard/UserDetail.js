@@ -16,19 +16,20 @@ export default function UserDetail() {
     } = useContext(Web3WalletContext);
     const {
         readBalanceOf,
-        readDepositedTokens
+        readDepositedTokens,
+        symbol 
     } = useContext(ContractFunctionsContext)
     return (
         <>
         <div className='token-border p-3'>
 
-            <h1 className='text-center text-primary'>User Detail</h1>
+            <h1 className='text-center text-primary m'>Profile</h1>
             {userConnected == true ? '' : <p className='text-center text-danger'>Please connect your wallet First</p>}
-            <p > WalletAddress : {accountAddress ? accountAddress : '-'}</p>
-            <p > Balance : {WalletBalance ? WalletBalance : '-'}</p>
+            <p className='mt-5'> WalletAddress : {accountAddress ? accountAddress : '-'}</p>
+            {/* <p > Balance : {WalletBalance ? WalletBalance : '-'}</p> */}
             <p>Network Name : {networkName ? networkName : '-'}</p>
-            <p>Token Balance : {userConnected == true ? readBalanceOf : '-'} </p>
-            <p>Deposited Tokens: {userConnected == true ? readDepositedTokens : '-'}</p>
+            <p>Token Balance : {userConnected == true ? readBalanceOf + ' '+ symbol : '-'} </p>
+            <p>Deposited Tokens: {userConnected == true ? readDepositedTokens +' '+ symbol : '-'}</p>
         </div>
         </>
     )

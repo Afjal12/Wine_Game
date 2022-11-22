@@ -19,19 +19,19 @@ export default function ContractFunctions({ children }) {
 
     const [matic, setMatic] = useState('');
     const [token, setToken] = useState('');
-
-
+    
+    
+    
+    
+    const { accountAddress, userConnected } = useContext(Web3WalletContext)
+    
+    const [readBalanceOf, setreadBalanceOf] = useState('');
+    const [readDepositedTokens, setreadDepositedTokens] = useState('');
+    
     function handleSetMatic(e) {
         setMatic(e.target.value)
         setToken((e.target.value) * 80)
     }
-
-
-    const { accountAddress, userConnected } = useContext(Web3WalletContext)
-
-    const [readBalanceOf, setreadBalanceOf] = useState('');
-    const [readDepositedTokens, setreadDepositedTokens] = useState('');
-
     const getToken = async (e) => {
         //  Function name - BuyTokens hai -write method ka 
         console.log("get token chal raha hai ");
@@ -75,9 +75,6 @@ export default function ContractFunctions({ children }) {
         } catch (error) {
             console.log(error);
         }
-
-
-
     }
     const depositedTokens = async () => {
 
@@ -140,7 +137,6 @@ export default function ContractFunctions({ children }) {
 
     const ClickDepositEth = async (e) => {
         e.preventDefault()
-        if (DepositTokens >= 20) {
             try {
                 const provider = await new ethers.providers.Web3Provider(window.ethereum);
                 const signer = await provider.getSigner();
@@ -150,13 +146,9 @@ export default function ContractFunctions({ children }) {
                 toast.success('Token Deposit Successfully')
             } catch (error) {
                 console.log(error);
-                toast.warn('Token Deposit Failed')
+                toast.warn('Transaction Failed')
             }
         }
-        else {
-            toast.info('Token must be Greater than 20')
-        }
-    }
 
     /// Bet Function Write Method ka 
     const [bettoken, setBetToken] = useState('')
@@ -192,14 +184,29 @@ export default function ContractFunctions({ children }) {
 
     // -------------------------------------------------------
 
+    // Symbol function read method ka 
+const [ symbol , setsymbol ] = useState('');
+useEffect(() => {
+    const getSymbol =async () => {
+        try {
+          const provider = await new ethers.providers.Web3Provider(window.ethereum);
+          const signer = await provider.getSigner();
+          const daiContract = await new ethers.Contract(Contract_Address,SmartContractABI,signer);
+          let smbl =await daiContract.symbol();
+          setsymbol(smbl)
+        } catch (error) {
+           console.log(error); 
+        }
+    
+      }
+      getSymbol()
+} ,[])
+ 
+    // --------------------------------
+
     /// GetTransactionHistory - read method ka
 
-    const [ transactionList , setTransactionList ] = useState([]);
-
-    console.log(transactionList);
-    
-
-
+    const [ transactionList , setTransactionList ] = useState([]); 
     const getTransactions = async () =>{
  
         try {
@@ -239,7 +246,8 @@ export default function ContractFunctions({ children }) {
             setIsHead,
             clickHeadOrTail,
             transactionList,
-            bettoken
+            bettoken,
+            symbol
         }}>
             {children}
         </ContractFunctionsContext.Provider>

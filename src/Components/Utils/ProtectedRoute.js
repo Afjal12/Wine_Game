@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Header from '../../Common/Header'
 import Sidebar from '../../Common/Sidebar/Sidebar'
+import './Utils.css'
 
 export default function ProtectedRoute() {
   return (
@@ -9,7 +10,7 @@ export default function ProtectedRoute() {
       <div className='col-md-12'>
       <div className='d-flex'>
 
-        <div style={{width: '65px'}}>
+        <div className='side-width'>
           <Sidebar />
         </div>
         <div className='w-100'>

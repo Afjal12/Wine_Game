@@ -1,5 +1,6 @@
 import './Game.css';
 import handle from '../../Assets/handle.webp'
+import slotHandle from '../../Assets/SLOT-Machine-handle.png'
 
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom';
@@ -249,9 +250,9 @@ const Game = ({ id, owned, close, expires }) => {
 
         }
 
-        document.getElementById('handle-btn').style.cssText = "transform : rotate(-20deg) ;background: transparent;border: unset ; transition : all 0.3s ";
+        document.getElementById('handle-btn').style.cssText = "transform : rotateX(200deg) ;background: transparent;border: unset ; transition : all 0.3s ";
         function changeHandle() {
-            document.getElementById('handle-btn').style.cssText = "transform : rotate(0deg) ;background: transparent;border: unset ;transition : all 0.3s ";
+            document.getElementById('handle-btn').style.cssText = "transform : rotateX(0deg) ;background: transparent;border: unset ;transition : all 0.3s ";
         }
         setTimeout(changeHandle, 300)
 
@@ -366,25 +367,10 @@ const Game = ({ id, owned, close, expires }) => {
                     height: '100vh'
 
                 }}>
-                    <div className='col-md-2 text-white'>
+                    <div className='col-md-8 text-white'>
 
                     </div>
-                    <div className='col-md-2  my-auto ' >
-                        {
-                            userConnected === true ?
-
-                                <button id='handle-btn' onClick={() => play()} style={{
-                                    background: 'transparent',
-                                    border: 'unset'
-                                }}>
-                                    {
-
-                                        <img src={handle} alt="image" width='100%' />
-
-                                    }
-                                </button> : <button className='btn btn-primary' onClick={ProvidermetamaskLogin} >Do you want to connect Plz Click Me</button>
-                        }
-                    </div>
+                
 
                     <div className="fullSlot col-md-10 p-2 game-css">
 
@@ -415,7 +401,22 @@ const Game = ({ id, owned, close, expires }) => {
                         {/* <h1 className="price">{"Available cash: " + readBalanceOf+ "$"}</h1> */}
                         <button onClick={() => setBalance(balance + 1000)} className="buyMoreButton">Add 1000 $</button>
                     </div>
+                    <div className='col-md-2  my-auto ' >
+                    {
+                            userConnected === true ?
 
+                                <button id='handle-btn' onClick={() => play()} style={{
+                                    background: 'transparent',
+                                    border: 'unset'
+                                }}>
+                                    {
+
+                                        <img src={slotHandle} alt="image" width='100%' />
+
+                                    }
+                                </button> : <button className='btn btn-primary' onClick={ProvidermetamaskLogin} >Do you want to connect Plz Click Me</button>
+                        }
+                    </div>
                 </div>
               
             </section>

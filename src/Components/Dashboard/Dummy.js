@@ -5,29 +5,32 @@ import Chart from "react-apexcharts";
 
 let barChartData = {
 
-    series: [{
-        name: 'Total Buy Token',
-        data: [44, 55, 41],
-        color: '#738AFE'
-    },
-    {
-        name: 'No. of Buy Token',
-        data: [8, 13, 27],
-        color: '#85F4FA'
-    },
-    {
-        name: 'Total Withdraw Token',
-        data: [13, 23, 20],
-        color: '#1240e9'
-    }
+    series: [
+        // {
+        //     name: 'Total Buy Token',
+        //     data: [44, 55, 41],
+        //     color: '#738AFE'
+        // },
+        {
+            name: 'No. of Buy Token',
+            data: [8, 13, 27],
+            color: '#85F4FA'
+        },
+        {
+            name: 'Total Withdraw Token',
+            data: [13, 19, 23],
+            color: '#1240e9'
+        }
     ],
     options: {
-        // stroke: {
-        //     width: 25
-        // },
+        stroke: {
+            curve: 'smooth',
+        },
+
         chart: {
             foreColor: '#ffffff',
-            type: 'bar',
+            type: 'line',
+
             // height: 350,
             // stacked: false,
             toolbar: {
@@ -37,34 +40,8 @@ let barChartData = {
                 enabled: false
             }
         },
-        // responsive: [{
-        //     breakpoint: 480,
-        //     options: {
-        //         legend: {
-        //             position: 'bottom',
-        //             offsetX: -10,
-        //             offsetY: 0
-        //         }
-        //     }
-        // }],
-        // plotOptions: {
-        //     bar: {
-        //         horizontal: false,
-        //         borderRadius: 10,
-        //         columnWidth: '25px',
-        //     },
-        //     radialBar: {
-        //         dataLabels: {
-        //             show: false
-        //         }
-        //     }
-        // },
         xaxis: {
-            // type: 'datetime',
-            // labels: {
-            //     format: "MMM"
-            // },
-            categories: ["Total buy token", "Number of Buy token", "No. of withdraw token"]
+            categories: [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030]
         },
         tooltip: {
             x: {
@@ -77,7 +54,19 @@ let barChartData = {
             show: true
         },
         fill: {
-            opacity: 1
+            opacity: 1,
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                type: "horizontal",
+                shadeIntensity: 0.5,
+                gradientToColors: undefined, // optional, if not defined - uses the shades of same color in series
+                inverseColors: true,
+                opacityFrom: 1,
+                opacityTo: 1,
+                stops: [0, 50, 100],
+                colorStops: []
+            },
         },
         grid: {
             show: true,
@@ -91,177 +80,168 @@ let barChartData = {
                     show: false
                 }
             },
+        },
+        dataLabels: {
+            enabled: true,
+            enabledOnSeries: undefined,
+            formatter: function (val, opts) {
+                return val
+            },
+            textAnchor: 'middle',
+            distributed: false,
+            offsetX: 0,
+            offsetY: 0,
+            style: {
+                fontSize: '14px',
+                fontFamily: 'Helvetica, Arial, sans-serif',
+                fontWeight: 'bold',
+                colors: undefined
+            },
+            background: {
+                enabled: true,
+                foreColor: '#fff',
+                padding: 4,
+                borderRadius: 2,
+                borderWidth: 1,
+                borderColor: '#fff',
+                opacity: 0.9,
+                dropShadow: {
+                    enabled: false,
+                    top: 1,
+                    left: 1,
+                    blur: 1,
+                    color: '#000',
+                    opacity: 0.45
+                }
+            },
+            dropShadow: {
+                enabled: false,
+                top: 1,
+                left: 1,
+                blur: 1,
+                color: '#000',
+                opacity: 0.45
+            }
+        },
+        markers: {
+            size: 0,
+            colors: '#000000',
+            strokeColors: '#000000',
+            strokeWidth: 2,
+            strokeOpacity: 0.9,
+            strokeDashArray: 0,
+            fillOpacity: 1,
+            discrete: [],
+            shape: "circle",
+            radius: 2,
+            offsetX: 0,
+            offsetY: 0,
+            onClick: undefined,
+            onDblClick: undefined,
+            showNullDataPoints: true,
+            hover: {
+                size: undefined,
+                sizeOffset: 3
+            }
+        },
+        states: {
+            normal: {
+                filter: {
+                    type: 'none',
+                    value: 0,
+                }
+            },
+            hover: {
+                filter: {
+                    type: 'lighten',
+                    value: 0.15,
+                }
+            },
+            active: {
+                allowMultipleDataPointsSelection: false,
+                filter: {
+                    type: 'darken',
+                    value: 0.35,
+                }
+            },
+        },
+        subtitle: {
+            text: "Tokens",
+            align: 'left',
+            margin: 10,
+            offsetX: 0,
+            offsetY: 0,
+            floating: false,
+            style: {
+                fontSize: '12px',
+                fontWeight: 'normal',
+                fontFamily: undefined,
+                color: '#9699a2'
+            },
+        },
+        tooltip: {
+            enabled: true,
+            enabledOnSeries: undefined,
+            shared: true,
+            followCursor: false,
+            intersect: false,
+            inverseOrder: false,
+            custom: undefined,
+            fillSeriesColor: false,
+            theme: false,
+            style: {
+                fontSize: '12px',
+                fontFamily: undefined,
+                color: '#000000'
+            },
+            onDatasetHover: {
+                highlightDataSeries: false,
+            },
+            x: {
+                show: true,
+                format: 'dd MMM',
+                formatter: undefined,
+            },
+            y: {
+                formatter: undefined,
+                title: {
+                    formatter: (seriesName) => seriesName,
+                },
+            },
+            z: {
+                formatter: undefined,
+                title: 'Size: '
+            },
+            marker: {
+                show: true,
+            },
+            items: {
+                display: 'flex',
+            },
+            fixed: {
+                enabled: false,
+                position: 'topRight',
+                offsetX: 0,
+                offsetY: 0,
+            },
         }
     },
 
 
 };
 
-// let donutData = {
-//     options: {
-//         labels: ["Fashion", "Accessories"],
-//         legend: {
-//             show: true,
-//             onItemClick: {
-//                 toggleDataSeries: true
-//             },
-//             onItemHover: {
-//                 highlightDataSeries: true
-//             }
-//         },
-//         plotOptions: {
-//             radialBar: {
-//                 size: undefined,
-//                 inverseOrder: false,
-//                 startAngle: 0,
-//                 endAngle: 275,
-//                 offsetX: 0,
-//                 offsetY: 0,
-//                 hollow: {
-//                     margin: 5,
-//                     size: "50%",
-//                     background: "transparent",
-//                     image: undefined,
-//                     imageWidth: 200,
-//                     imageHeight: 200,
-//                     imageOffsetX: 0,
-//                     imageOffsetY: 0,
-//                     imageClipped: true,
-//                     position: "front",
-//                     dropShadow: {
-//                         enabled: false,
-//                         top: 0,
-//                         left: 0,
-//                         blur: 3,
-//                         opacity: 0.5
-//                     }
-//                 },
-//                 track: {
-//                     show: true,
-//                     startAngle: undefined,
-//                     endAngle: undefined,
-//                     background: "#f2f2f2",
-//                     strokeWidth: "97%",
-//                     opacity: 1,
-//                     margin: 5,
-//                     dropShadow: {
-//                         enabled: false,
-//                         top: 0,
-//                         left: 0,
-//                         blur: 3,
-//                         opacity: 0.5
-//                     }
-//                 },
-//                 dataLabels: {
-//                     show: true,
-//                     name: {
-//                         show: true,
-//                         fontSize: "10px",
-//                         fontFamily: undefined,
-//                         color: undefined,
-//                         offsetY: -10,
-//                     },
-//                     value: {
-//                         show: true,
-//                         fontSize: "10px",
-//                         fontFamily: undefined,
-//                         color: undefined,
-//                         offsetY: 16,
-//                         formatter: function (val) {
-//                             return val + "%";
-//                         }
-//                     },
-//                 }
-//             }
-//         }
-//     },
 
-//     series: [100, 255]
-// };
-
-// let state = {
-
-//     series: [{
-//         name: 'Sales',
-//         data: [50, 45, 50, 45, 50, 45, 50, 45, 50],
-//         color: "#3A57E8",
-//     }, {
-//         name: 'Cost',
-//         data: [40, 35, 40, 35, 40, 35, 40, 35, 40],
-//         color: "#85C5FA"
-//     }],
-//     options: {
-//         legend: {
-//             position: 'top',
-//         },
-//         grid: {
-//             show: false,      // you can either change hear to disable all grids
-//             yaxis: {
-//                 lines: {
-//                     show: false  //or just here to disable only x axis grids
-//                 }
-//             },
-//             xaxis: {
-//                 lines: {
-//                     show: false  //or just here to disable only x axis grids
-//                 }
-//             }
-//         },
-//         chart: {
-//             height: 350,
-//             type: 'area',
-//             toolbar: {
-//                 show: false
-//             },
-//         },
-//         dataLabels: {
-//             enabled: false
-//         },
-//         stroke: {
-//             show: true,
-//             curve: 'smooth',
-//             lineCap: 'butt',
-//             colors: undefined,
-//             width: 1,
-//             dashArray: 0,
-//         },
-//         fill: {
-//             type: 'gradient',
-//             gradient: {
-//                 shade: 'light',
-//                 type: "vertical",
-//                 shadeIntensity: 0.2,
-//                 gradientToColors: '#3A57E8', // optional, if not defined - uses the shades of same color in series
-//                 inverseColors: false,
-//                 opacityFrom: 0.4,
-//                 opacityTo: 0,
-//                 stops: [0, 25],
-//                 colorStops: []
-//             }
-//         },
-//         xaxis: {
-//             type: 'datetime',
-//             labels: {
-//                 format: "MMM"
-//             },
-//             categories: ["2017-12-19T00:00:00.000Z", "2018-01-19T00:00:00.000Z", "2018-02-19T01:30:00.000Z", "2018-03-19T02:30:00.000Z", "2018-04-19T03:30:00.000Z", "2018-05-19T04:30:00.000Z", "2018-06-19T05:30:00.000Z", "2018-07-19T06:30:00.000Z", "2018-08-19T06:30:00.000Z"]
-//         },
-//         tooltip: {
-//             x: {
-//                 format: 'dd/MM/yy HH:mm'
-//             },
-//         },
-//     },
-
-
-// };
 
 export default function Dummy() {
     return (
         <>
             <div className='special-page-container extra-dark'>
                 <div className='w-100  '>
-                    <Chart options={barChartData.options} series={barChartData.series} type="bar" />
+                    <Chart
+                        options={barChartData.options}
+                        series={barChartData.series}
+                        type="line" />
+
                 </div>
             </div>
         </>
