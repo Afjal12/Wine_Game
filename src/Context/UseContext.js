@@ -115,7 +115,7 @@ export default function MetamskConnect({ children }) {
        else if(window?.ethereum?.networkVersion == '5'){
 
           setWalletBalance(ethers?.utils?.formatEther(balance) +' '+ 'ETH') 
-          setNetworkName('Gorli')
+          setNetworkName('Goerli')
         }
         // Format the string into main latest balance
       })

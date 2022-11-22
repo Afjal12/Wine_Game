@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { useContext } from 'react'
 import { toast } from 'react-toastify';
 import { Web3WalletContext } from '../../Context/UseContext';
-import { ContractFunctionsContext } from '../Utils/ContractFunctions'
+import { ContractFunctionsContext } from '../Utils/ContractFunctions';
+// import '../BuyToken/BuyToken.css'
 
 export default function DepositEth() {
     const {
@@ -40,6 +41,8 @@ export default function DepositEth() {
         <>
 
             <div title='Deposit Eth' id='deposit-token' className=' dashboard-body pt-1 justify-content-between h-100'>
+            <button type="button" className="btn-close " data-bs-dismiss="modal" aria-label="Close" ><i class="fa-solid fa-xmark"></i></button>
+
                 <div className='card-width  font-token p-4 token-border  '>
                     <form>
                         <h1 className='text-center  text-primary'>Deposit Token</h1>

@@ -24,10 +24,10 @@ export default function Coin() {
         if (userConnected == false) {
 
             toast.warn('Connect Your Wallet First');
-        } else if (bettoken < 1) {
+        } else if (+bettoken < 1) {
             toast.info('Amount must be greater than 1')
         }
-        else if (bettoken > readDepositedTokens) {
+        else if (+bettoken > +readDepositedTokens) {
             toast.warn('Insufficient Balance')
         }
     }
@@ -106,8 +106,8 @@ export default function Coin() {
         <>
 
             <div className='min-vh-100'>
-                <div className='row justify-content-between w-100'>
-                    <div className="pagetitle col-md-8 text-light" style={{ background: '#072333', color: 'rgba(255, 255, 255, 0.781)' }}>
+                <div className='d-flex flex-wrap justify-content-between w-100'>
+                    <div className="pagetitle  text-light" style={{ background: '#072333', color: 'rgba(255, 255, 255, 0.781)' }}>
                         <div className=' mx-5 py-5 '>
 
                             <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Coin Flip</h1>
@@ -121,11 +121,11 @@ export default function Coin() {
                             </nav>
                         </div>
                     </div>
-                    <div className="my-auto col-md-4 py-2"> 
+                    <div className="my-auto  py-2"> 
                         <button type="button" className='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#BuyToken" >
                             Buy Token
                         </button>
-                        <button type="button" className='btn btn-warning mx-3' data-bs-toggle="modal" data-bs-target="#DepositToken">
+                        <button type="button" className='btn btn-success mx-3' data-bs-toggle="modal" data-bs-target="#DepositToken">
                             Deposit Token
                         </button>
 
@@ -134,17 +134,9 @@ export default function Coin() {
                     <div className="modal fade " id="BuyToken" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog ">
                             <div className="modal-content">
-                                <div className="modal-header">
-                                    {/* <h5 className="modal-title" id="exampleModalLabel">Buy Token</h5> */}
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
                                 <div className="modal-body p-0 ">
                                  <BuyToken />
                                 </div>
-                                {/* <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -152,17 +144,9 @@ export default function Coin() {
                        <div className="modal fade " id="DepositToken" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog ">
                             <div className="modal-content">
-                                <div className="modal-header">
-                                    {/* <h5 className="modal-title" id="exampleModalLabel">Buy Token</h5> */}
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
                                 <div className="modal-body p-0 ">
                                  <DepositEth />
                                 </div>
-                                {/* <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" className="btn btn-primary">Save changes</button>
-                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -211,7 +195,7 @@ export default function Coin() {
                             <div className="buttons-main">
                                 <button className='button-btn' id="flip-button" disabled={disable} onClick={
 
-                                    userConnected == true && bettoken >= 1 && bettoken < readDepositedTokens ? flipButton : showError
+                                    userConnected == true && +bettoken >= 1 && +bettoken < +readDepositedTokens ? flipButton : showError
                                 }>
                                     Flip Coin
                                 </button>

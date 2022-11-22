@@ -75,9 +75,6 @@ export default function ContractFunctions({ children }) {
         } catch (error) {
             console.log(error);
         }
-
-
-
     }
     const depositedTokens = async () => {
 
