@@ -28,7 +28,10 @@ export default function Transaction() {
       disabled: 'rgba(0,0,0,.12)',
     },
   }, 'dark');
-  const { transactionList } = useContext(ContractFunctionsContext);
+  const { transactionList} = useContext(ContractFunctionsContext);
+
+  let reverseTransactions = [...transactionList]
+  console.log(reverseTransactions);
   const {userConnected} = useContext(Web3WalletContext);
   const columns = [
     {
@@ -44,8 +47,8 @@ export default function Transaction() {
       selector: row => row.BetTokens.toString()
     },
     {
-      name: 'Won Tokens',
-      selector: row => row.WonTokens.toString()
+      name: 'Head or Tail',
+      selector: row => row._HeadOrTail.toString()
     }
   ];
 
@@ -56,7 +59,8 @@ export default function Transaction() {
 
         <DataTable
           columns={columns}
-          data={userConnected == true ? transactionList :  ''}
+          // data={userConnected == true ? reverseTransactions :  ''}
+          data={userConnected == true ?reverseTransactions.reverse() : ''}
           subHeader
           subHeaderAlign='center'
           fixedHeader

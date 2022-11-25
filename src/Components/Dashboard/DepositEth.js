@@ -7,6 +7,8 @@ import { ContractFunctionsContext } from '../Utils/ContractFunctions';
 // import '../BuyToken/BuyToken.css'
 
 export default function DepositEth() {
+
+    const [token, setToken] = useState('');
     const {
         handleDeposit,
         ClickDepositEth,
@@ -15,17 +17,19 @@ export default function DepositEth() {
     const ClickDeposit = (e) => {
         e.preventDefault()
         ClickDepositEth(e)
+        setToken('')
     }
     const {
         userConnected
     } = useContext(Web3WalletContext)
 
-    const [token, setToken] = useState('');
+
     const handleChange = (e) => {
         handleDeposit(e)
         setToken(e.target.value)
     }
     const showError = (e) => {
+        setToken('')
         e.preventDefault();
         if (userConnected == !true) {
             toast.info('Connect your wallet First')
@@ -41,45 +45,47 @@ export default function DepositEth() {
         <>
 
             <div title='Deposit Eth' id='deposit-token' className=' dashboard-body pt-1 justify-content-between h-100'>
-            <button type="button" className="btn-close " data-bs-dismiss="modal" aria-label="Close" ><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" className="btn-close " data-bs-dismiss="modal" aria-label="Close" ><i className="fa-solid fa-xmark"></i></button>
 
                 <div className='card-width  font-token p-4 token-border  '>
-                    <form>
+                    <form onSubmit={userConnected == true && +token >= 20 && +token <= +readBalanceOf ? ClickDeposit : showError}>
                         <h1 className='text-center  text-primary'>Deposit Token</h1>
                         <p className='mt-5'>Network : Matic</p>
 
                         <span>Tokens</span><br />
-                        <p>
+                        <div>
 
-                            <input required type="number" className='form-control bg-dark text-white' onChange={handleChange} placeholder='No of Tokens' />
-                        </p>
-                        <div className='d-flex justify-content-between'>
+                            <input required type="number" className='form-control bg-dark text-white' value={token}  onChange={handleChange} placeholder='No of Tokens' />
+                        </div>
+                        <div className='my-4'>
+                        <div className='d-flex justify-content-between '>
 
-                            <p className='w-50'>
+                            <div className='w-50'>
                                 <span className='span-bold'>Total Tokens</span><br />
                                 <span>{userConnected == true ? readBalanceOf : '-'}</span>
 
-                            </p>
-                            <p className='w-50'>
+                            </div>
+                            <div className='w-50'>
                                 <span className='span-bold'>You Deposit Token</span><br />
                                 <span>{token}</span>
-                            </p>
+                            </div>
                         </div>
-                        <div className='d-flex justify-content-between'>
-                            <p className='w-50'>
+                        <div className='d-flex justify-content-between my-3'>
+                            <div className='w-50'>
                                 <span className='span-bold'>Minimum Deposit Token</span><br />
                                 <span>20</span>
-                            </p>
-                            <p className='w-50'>
+                            </div>
+                            <div className='w-50'>
                                 <span className='span-bold'>Token Deposit Fee</span><br />
                                 <span>3 %</span>
 
-                            </p>
+                            </div>
 
                         </div>
-                        <p className='text-center'>
-                            <button className='btn btn-primary w-100' onClick={userConnected == true && +token >= 20 && +token <= +readBalanceOf ? ClickDeposit : showError}>Submit</button>
-                        </p>
+                        </div>
+                        <div className='text-center'>
+                            <button type='submit'   className='btn btn-primary w-100' >Submit</button>
+                        </div>
                     </form>
                 </div>
 

@@ -11,25 +11,25 @@ export default function Sidebar() {
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
-            <button type="button" class="burger" onclick={toggleSidebar}></button>
-            <div class="background"></div>
-            <aside class="sidebar">
+            <button type="button" className="burger" onClick={toggleSidebar}></button>
+            <div className="background"></div>
+            <aside className="sidebar">
                 <button type="button">
-                    {/* <i class="material-symbols-outlined">home</i> */}
-                    <Link  class="material-symbols-outlined text-white" to="/">home</Link>
+                    {/* <i className="material-symbols-outlined">home</i> */}
+                    <Link  className="material-symbols-outlined text-white" to="/">home</Link>
                     <span>Home</span>
                 </button>
                 <div>
                     <button type="button">
-                        <i class="material-symbols-outlined">search</i>
+                        <i className="material-symbols-outlined">search</i>
                         <span>Explorer</span>
                     </button>
                     <button type="button">
-                        <i class="material-symbols-outlined">settings</i>
+                        <i className="material-symbols-outlined">settings</i>
                         <span>Settings</span>
                     </button>
                     <button type="button">
-                        <i class="material-symbols-outlined">account_circle</i>
+                        <i className="material-symbols-outlined">account_circle</i>
                         {/* <span>Account</span> */}
                         <span className='bg-dark ' style={{minWidth: '25vw'}}><UserDetail /></span>
                     </button>
@@ -38,16 +38,16 @@ export default function Sidebar() {
                     {/* <li className="nav-item"> */}
                         {/* <Link className="nav-link" to="/">Log Out</Link> */}
                     {/* </li> */}
-                    <Link class="material-symbols-outlined text-white" to="/">logout</Link>
+                    <Link className="material-symbols-outlined text-white" to="/">logout</Link>
 
-                    {/* <i class="material-symbols-outlined">logout</i> */}
+                    {/* <i className="material-symbols-outlined">logout</i> */}
                     <span>Logout</span>
                 </button>
             </aside>
 
-            {/* <p class="text-info">Change the width of the screen, below 500px, to see how the sidebar is hidden.</p>
+            {/* <p className="text-info">Change the width of the screen, below 500px, to see how the sidebar is hidden.</p>
 
-            <p class="text-dev">Development of  <a href="https://github.com/frontend-joe/css-sidebars" target="_blank">Frontend Joe</a></p> */}
+            <p className="text-dev">Development of  <a href="https://github.com/frontend-joe/css-sidebars" target="_blank">Frontend Joe</a></p> */}
         </div>
     )
 }

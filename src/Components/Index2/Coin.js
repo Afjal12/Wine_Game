@@ -9,6 +9,8 @@ import TableTransaction from './TableTransaction';
 import DataTable, { createTheme } from 'react-data-table-component';
 import BuyToken from '../BuyToken/BuyToken';
 import DepositEth from '../Dashboard/DepositEth';
+import { ThreeCircles } from 'react-loader-spinner';
+import TransacactionLoader from '../Loader/TransactionLoader';
 
 export default function Coin() {
 
@@ -16,7 +18,7 @@ export default function Coin() {
     const [tail, setTail] = useState(0);
     const [coin, setCoin] = useState('');
     const [disable, setDisable] = useState(false);
-
+    const [select, setSelect] = useState('')
 
 
     const showError = (e) => {
@@ -32,34 +34,56 @@ export default function Coin() {
         }
     }
 
+    const getResult = async () => {
+
+        let filterTransaction = await [...transactionList]
+        let R = await filterTransaction.reverse();
+        let result = await R[0]?.result
+        console.log(result);
+        return await result
+    }
+
+
     const flipButton = async (e) => {
         e.preventDefault();
-
+        
         let batt = await clickHeadOrTail();
+        let headOrTail = await getResult();
+
 
         if (batt == true) {
-            let i = Math.floor(Math.random() * 10);
+            // let i = Math.floor(Math.random() * 10);
             setDisable(true)
             coin.style.animation = "none";
-            if (i % 2 == 0) {
+            if (headOrTail == true && select == 'Head' || headOrTail == false && select == 'Tail') {
                 setTimeout(() => {
                     coin.style.animation = "spin-heads 3s forwards";
                 }, 100);
                 setTimeout(() => {
                     setHead(head + 1);
                     setDisable(false)
+                    if (headOrTail == true && select == 'Head') {
+                        toast.success('🏆 Contgrateulations You Win 2X Token 🏆')
+                    } else {
+                        toast.info('😮 So Close! But No luck 😮')
+                    }
                 }, 3000);
-                setIsHead(true)
+
             }
-            else {
+            else if (headOrTail == true && select == 'Tail' || headOrTail == false && select == 'Head') {
                 setTimeout(() => {
                     coin.style.animation = "spin-tails 3s forwards";
                 }, 100);
                 setTimeout(() => {
                     setTail(tail + 1);
                     setDisable(false)
+                    if (headOrTail == true && select == 'Tail') {
+                        toast.success('🏆 Contgrateulations You Win 2X Token 🏆')
+                    } else {
+                        toast.info('😮 So Close! But No luck 😮')
+                    }
                 }, 3000);
-                setIsHead(false)
+
             }
             setTimeout(3000);
         }
@@ -83,27 +107,27 @@ export default function Coin() {
 
     const {
         userConnected,
+        loader,
+        setLoader,
     } = useContext(Web3WalletContext)
 
     const {
         handleBetToken,
-        setIsHead,
+        setUserSelect,
         clickHeadOrTail,
         bettoken,
         readDepositedTokens,
         symbol,
-        // setcheck1
+        transactionList
     } = useContext(ContractFunctionsContext)
 
-    const [userSelect, setUserSelect] = useState('');
-    // const [check2 , setcheck2] = useState(false);
-    console.log(userSelect);
-    // console.log(check2);
 
- 
-    return (
+
+
+return (
 
         <>
+        { loader &&  <TransacactionLoader />}
 
             <div className='min-vh-100'>
                 <div className='d-flex flex-wrap justify-content-between w-100'>
@@ -121,7 +145,7 @@ export default function Coin() {
                             </nav>
                         </div>
                     </div>
-                    <div className="my-auto  py-2"> 
+                    <div className="my-auto  py-2">
                         <button type="button" className='btn btn-primary mx-3' data-bs-toggle="modal" data-bs-target="#BuyToken" >
                             Buy Token
                         </button>
@@ -131,33 +155,35 @@ export default function Coin() {
 
                     </div>
                     {/* <!-- Buy Token Modal --> */}
-                    <div className="modal fade " id="BuyToken" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade " id="BuyToken" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog ">
                             <div className="modal-content">
                                 <div className="modal-body p-0 ">
-                                 <BuyToken />
+                                    <BuyToken />
                                 </div>
                             </div>
                         </div>
                     </div>
-                       {/* <!-- Deposit  Token Modal --> */}
-                       <div className="modal fade " id="DepositToken" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    {/* <!-- Deposit  Token Modal --> */}
+                    <div className="modal fade " id="DepositToken" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog ">
                             <div className="modal-content">
                                 <div className="modal-body p-0 ">
-                                 <DepositEth />
+                                    <DepositEth />
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-
-                <div className='row justify-content-center w-100'>
+                <div style={{
+                    marginBottom : '1rem'
+                }}>
+                <div className='row justify-content-center w-100 '>
                     <div className="container-coin col-md-5 " style={{
                         // height: '33rem'
                     }}>
-                        <form >
+                        <form onSubmit={userConnected == true && +bettoken >= 1 && +bettoken < +readDepositedTokens ? flipButton : showError}>
                             <p className='text-center  bet-text m-0'>Balance in Pool : {userConnected == true ? <span className='bet-text'> {readDepositedTokens + ' ' + symbol}</span> : ''} </p>
                             <div className="coin-main" id="coin">
 
@@ -180,23 +206,39 @@ export default function Coin() {
                             </div>
 
                             <div className="stats d-flex justify-content-between">
-                                {/* <p id="heads-count" >Heads: {head}</p>
-                            <p id="tails-count">Tails: {tail}</p> */}
+
                                 <div className="form-check">
-                                    <input className="form-check-input " type="radio" onBlur={() => setUserSelect('head')} name="flexRadioDefault" id="flexRadioDefault1" />
+                                    <input
+                                        className="form-check-input "
+                                        type="radio"
+                                        required={true}
+                                        onBlur={() => {
+                                            setUserSelect('Head')
+                                            setSelect('Head')
+                                        }}
+                                        name="flexRadioDefault"
+                                        id="flexRadioDefault1"
+                                    />
                                     <label className="form-check-label mx-2" htmlFor="flexRadioDefault1">Heads: {head}</label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input " type="radio" onBlur={() => setUserSelect('tail')} name="flexRadioDefault" id="flexRadioDefault2" />
+                                    <input
+                                        className="form-check-input "
+                                        type="radio"
+                                        required={true}
+                                        onBlur={() => {
+                                            setUserSelect('Tail')
+                                            setSelect('Tail')
+                                        }}
+                                        name="flexRadioDefault"
+                                        id="flexRadioDefault2"
+                                    />
                                     <label className="form-check-label mx-2" htmlFor="flexRadioDefault2">Tails: {tail}</label>
                                 </div>
                             </div>
 
                             <div className="buttons-main">
-                                <button className='button-btn' id="flip-button" disabled={disable} onClick={
-
-                                    userConnected == true && +bettoken >= 1 && +bettoken < +readDepositedTokens ? flipButton : showError
-                                }>
+                                <button type='submit' className='button-btn' id="flip-button" disabled={disable} >
                                     Flip Coin
                                 </button>
                                 <button className='button-btn' id="reset-button" onClick={resetButton}>
@@ -208,11 +250,17 @@ export default function Coin() {
                     </div>
                     <div className='col-md-6'>
                         <div>
-                          <TableTransaction />
+                            <TableTransaction />
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
+        
+   
+           
+     
+    
         </>
     )
 }

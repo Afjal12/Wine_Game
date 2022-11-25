@@ -24,10 +24,13 @@
     "react-chartjs-2": "^4.3.1",
     "react-data-table-component": "^7.5.3",
     "react-dom": "^18.2.0",
+    "react-dropdown-select": "^4.9.0",
     "react-easy-bar-chart": "^0.0.2",
     "react-flipcoin": "^0.0.4",
+    "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "react-select": "^5.6.1",
     "react-toastify": "^9.1.1",
     "react-wheel-of-prizes": "^1.0.9",
     "web-vitals": "^2.1.4"

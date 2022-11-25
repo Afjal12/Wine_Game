@@ -48,9 +48,9 @@ export default function BuyToken() {
 
     return (
         <>
-
+        
             <section title='Buy Token' id='buy-token' className='game-body ' >
-                <button type="button" className="btn-close " data-bs-dismiss="modal" aria-label="Close" ><i class="fa-solid fa-xmark"></i></button>
+                <button type="button" className="btn-close " data-bs-dismiss="modal" aria-label="Close" ><i className="fa-solid fa-xmark"></i></button>
 
                 <div className='m-0  p-0 text-white w-100 mx-auto my-auto '>
                     <div className='w-100  p-3 ' style={{

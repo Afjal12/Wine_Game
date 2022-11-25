@@ -59,9 +59,9 @@ export default function TableTransaction() {
     } = useContext(ContractFunctionsContext)
 
     let filterBenefitTransactions = transactionList.filter((e) => {
-        return e.TimesBenefit.toString() >= 1
+        return e.TimesBenefit.toString() >= 2
     })
-    console.log(filterBenefitTransactions);
+    // console.log(filterBenefitTransactions);
 
 
     return (
