@@ -1,0 +1,19 @@
+/* ---------- Loader Css ---------- */
+
+.loader{
+    width: 5rem;
+}
+.loader-main{
+    position: fixed;
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+}
+
+.back-blur{
+    backdrop-filter: blur(3px);
+}

@@ -1,13 +1,25 @@
 import { ethers } from 'ethers';
 import React, { useState } from 'react'
+import { useReducer } from 'react';
+import { useMemo } from 'react';
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Route, useLocation, useNavigate, useSubmit } from 'react-router-dom'
 import { Web3WalletContext } from '../Context/UseContext';
 
 
 export default function Header() {
 
   const { example, userConnected, accountAddress, walletConnected, ProvidermetamaskLogin, disconnectUser, getMetamaskAccount, WalletBalance } = useContext(Web3WalletContext);
+
+
+  // const me = useMemo();
+  // console.log('useMemo ' , me);
+  // const sd = useReducer()
+  // console.log('UseReducer ' , sd);
+  // const d2 = useSubmit();
+  // console.log('Use Submit ' ,d2);
+
+  
 
   return (
 
@@ -37,7 +49,10 @@ export default function Header() {
               <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-success" type="submit">Search</button>
             </form>
-            {
+         <span id='connectBtn'>
+             
+          {
+
               userConnected && accountAddress ?
                 <button className='btn btn-outline-succes mx-3'
                   onClick={disconnectUser}>
@@ -46,6 +61,7 @@ export default function Header() {
                 :
                 <button className='btn btn-outline-succes mx-3' onClick={ProvidermetamaskLogin} >Connect Wallet</button>
             }
+         </span>
           </div>
         </div>
       </nav>

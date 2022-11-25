@@ -19,6 +19,9 @@ export default function MetamskConnect({ children }) {
   const [networkName , setNetworkName] = useState('')
   const onboarding = new MetaMaskOnboarding();
 
+
+  const [loader , setLoader] = useState(false)
+
   // const data = useContext(Web3WalletContext)
 
   const ProvidermetamaskLogin = async (e) => {
@@ -136,6 +139,8 @@ export default function MetamskConnect({ children }) {
         getMetamaskAccount,
         WalletBalance,
         WalletBalanceInNumber,
+        loader,
+        setLoader
       }} >
         {children}
       </Web3WalletContext.Provider>

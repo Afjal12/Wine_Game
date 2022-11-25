@@ -16,18 +16,31 @@ import { toast } from 'react-toastify';
 export const ContractFunctionsContext = createContext();
 
 export default function ContractFunctions({ children }) {
+    const { accountAddress, userConnected, setLoader, loader } = useContext(Web3WalletContext)
 
     const [matic, setMatic] = useState('');
     const [token, setToken] = useState('');
-    
-    
-    
-    
-    const { accountAddress, userConnected } = useContext(Web3WalletContext)
-    
+
+    // -- Reload States --
+
+    const [depositReload, setDepositReload] = useState(true)
+    const [balanceReload, setBalanceReload] = useState(true)
+    const [betReload, setBetReload] = useState(true)
+
+    const dependencies = [
+        depositReload,
+        balanceReload,
+        betReload,
+        userConnected,
+    ];
+
+    console.log(...dependencies);
+    // -------------------
+
+
     const [readBalanceOf, setreadBalanceOf] = useState('');
     const [readDepositedTokens, setreadDepositedTokens] = useState('');
-    
+
     function handleSetMatic(e) {
         setMatic(e.target.value)
         setToken((e.target.value) * 80)
@@ -48,20 +61,29 @@ export default function ContractFunctions({ children }) {
             const decimal = await daiContract.BuyTokens(accountAddress, token, {
                 value: parseEther(matic)
             })
+            setLoader(true)
+            await decimal.wait()
+            setBalanceReload(!balanceReload)
+            setLoader(false)
             console.log(decimal);
             // decimal.wait()
             toast.success('Transaction Successful')
 
         } catch (error) {
+            setLoader(false)
             console.log(error);
             toast.warn('Transaction Failed')
         }
     }
 
     useEffect(() => {
-        balanceOf()
         depositedTokens()
-    }, [userConnected])
+    }, [...dependencies])      //   USE STRUCT OPERATOR
+
+    useEffect(() => {
+        balanceOf()
+    }, [...dependencies])       //   USE STRUCT OPERATOR
+
     const balanceOf = async () => {
         // Function name -balanceOf hai -read method ka
         try {
@@ -115,11 +137,14 @@ export default function ContractFunctions({ children }) {
                 console.log(withdrawAddress);
                 console.log(withdrawTokens);
                 let withdraw = await daiContract.withdrawTokens(withdrawAddress, withdrawTokens);
+                setLoader(true)
                 withdraw.wait()
+                setLoader(false)
                 console.log(withdraw);
                 toast.success('Token withdrawed successfully')
 
             } catch (error) {
+                setLoader(false)
                 console.log(error);
                 toast.warn('Token withdrawed failed')
             }
@@ -137,44 +162,60 @@ export default function ContractFunctions({ children }) {
 
     const ClickDepositEth = async (e) => {
         e.preventDefault()
-            try {
-                const provider = await new ethers.providers.Web3Provider(window.ethereum);
-                const signer = await provider.getSigner();
-                const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer)
-                let Eth = await daiContract.DepositEth(DepositTokens)
-                console.log(Eth);
-                toast.success('Token Deposit Successfully')
-            } catch (error) {
-                console.log(error);
-                toast.warn('Transaction Failed')
-            }
+        try {
+            const provider = await new ethers.providers.Web3Provider(window.ethereum);
+            const signer = await provider.getSigner();
+            const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer)
+            let Eth = await daiContract.DepositEth(DepositTokens)
+            setLoader(true)
+            await Eth.wait();
+            setLoader(false)
+            setDepositReload(!depositReload)
+            console.log(Eth);
+            toast.success('Token Deposit Successfully')
+        } catch (error) {
+            setLoader(false)
+            console.log(error);
+            toast.warn('Transaction Failed')
         }
+    }
 
     /// Bet Function Write Method ka 
     const [bettoken, setBetToken] = useState('')
-    const [isHead, setIsHead] = useState(false);
+    const [userSelect, setUserSelect] = useState('');
     const TimesProfit = 2;
     let userAddress = accountAddress;
+
+    const [hash, setHash] = useState('');
+    console.log(userSelect);
 
 
     const handleBetToken = (e) => {
         setBetToken(e.target.value)
     }
 
+
     const clickHeadOrTail = async () => {
 
         if (bettoken >= 1) {
             try {
+
                 const provider = await new ethers.providers.Web3Provider(window.ethereum)
                 const signer = await provider.getSigner();
                 const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
-                let bet = await daiContract.Bet(userAddress, bettoken, TimesProfit, isHead);
-                console.log(userAddress, bettoken, TimesProfit, isHead);
+                let bet = await daiContract.Bet(userAddress, bettoken, TimesProfit, userSelect);
+                setLoader(true)
+                await bet.wait()
+                setLoader(false)
+                console.log(userAddress, bettoken, TimesProfit, userSelect);
                 console.log(bet);
+                setHash(bet?.hash)
                 toast.success('Transaction Successful')
+                setBetReload(!betReload)
                 return true
             } catch (error) {
                 toast.warn('Transaction Failed')
+                setLoader(false)
                 console.log(error);
             }
         } else {
@@ -185,46 +226,51 @@ export default function ContractFunctions({ children }) {
     // -------------------------------------------------------
 
     // Symbol function read method ka 
-const [ symbol , setsymbol ] = useState('');
-useEffect(() => {
-    const getSymbol =async () => {
-        try {
-          const provider = await new ethers.providers.Web3Provider(window.ethereum);
-          const signer = await provider.getSigner();
-          const daiContract = await new ethers.Contract(Contract_Address,SmartContractABI,signer);
-          let smbl =await daiContract.symbol();
-          setsymbol(smbl)
-        } catch (error) {
-           console.log(error); 
+    const [symbol, setsymbol] = useState('');
+    useEffect(() => {
+        const getSymbol = async () => {
+            try {
+                const provider = await new ethers.providers.Web3Provider(window.ethereum);
+                const signer = await provider.getSigner();
+                const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+                let smbl = await daiContract.symbol();
+                setsymbol(smbl)
+            } catch (error) {
+                console.log(error);
+            }
+
         }
-    
-      }
-      getSymbol()
-} ,[])
- 
+        getSymbol()
+    }, [...dependencies])
+
     // --------------------------------
 
     /// GetTransactionHistory - read method ka
 
-    const [ transactionList , setTransactionList ] = useState([]); 
-    const getTransactions = async () =>{
- 
+    const [transactionList, setTransactionList] = useState([]);
+    const getTransactions = async () => {
+
         try {
             const provider = await new ethers.providers.Web3Provider(window.ethereum);
             const signer = await provider.getSigner();
             const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
+            console.log(daiContract);
             let transactions = await daiContract.GetTransactionHistory()
             setTransactionList(transactions)
-
         } catch (error) {
             console.log(error);
         }
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         getTransactions()
-    },[accountAddress])
+    }, [...dependencies])
 
+    // console.log(hash);
+    // let filter = transactionList.filter((e) => {
+    //     return e. 
+    // });
+    // console.log(filter);
     // ----------------------------------------------------------
 
     return (
@@ -243,7 +289,7 @@ useEffect(() => {
             handleDeposit,
             ClickDepositEth,
             handleBetToken,
-            setIsHead,
+            setUserSelect,
             clickHeadOrTail,
             transactionList,
             bettoken,

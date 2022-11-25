@@ -9,7 +9,6 @@ export default function Dashboard() {
     <>
       <div className="pagetitle dashboard-body ">
         <div className='w-25 mx-5 py-5 '>
-
           <h1 style={{ color: 'rgba(255, 255, 255, 0.781)' }}>Dashboard</h1>
           <nav>
             <ol className="breadcrumb m-0">

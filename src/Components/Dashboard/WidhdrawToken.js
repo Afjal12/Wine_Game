@@ -23,7 +23,7 @@ export default function WidhdrawToken() {
 
             <div title='Withdraw Token' className=''>
                 <div className='card-width  font-token p-4 token-border  '>
-                    <form >
+                    <form onSubmit={ClickWithdrawFunction}>
                         <h1 className='text-center text-primary'>Withdraw Token</h1>
                         <p>Network : {userConnected == true ? networkName : 'Connect your wallet First'}</p>
                         <span>Address</span><br />
@@ -66,7 +66,7 @@ export default function WidhdrawToken() {
                         </div>
                         <p className='text-center'>
 
-                            <button className='btn btn-primary w-100' onClick={ClickWithdrawFunction}>Submit</button>
+                            <button type='submit' className='btn btn-primary w-100' >Submit</button>
                         </p>
 
                     </form>
