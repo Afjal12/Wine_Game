@@ -179,11 +179,11 @@ return (
                 <div style={{
                     marginBottom : '1rem'
                 }}>
-                <div className='row justify-content-center w-100 '>
+                <div className='row justify-content-center w-100 ' style={{margin : 'unset'}}>
                     <div className="container-coin col-md-5 " style={{
                         // height: '33rem'
                     }}>
-                        <form onSubmit={userConnected == true && +bettoken >= 1 && +bettoken < +readDepositedTokens ? flipButton : showError}>
+                        <form onSubmit={userConnected == true && +bettoken >= 1 && +bettoken <= +readDepositedTokens ? flipButton : showError}>
                             <p className='text-center  bet-text m-0'>Balance in Pool : {userConnected == true ? <span className='bet-text'> {readDepositedTokens + ' ' + symbol}</span> : ''} </p>
                             <div className="coin-main" id="coin">
 
@@ -248,7 +248,7 @@ return (
 
                         </form>
                     </div>
-                    <div className='col-md-6'>
+                    <div className='col-md-6 my-2'>
                         <div>
                             <TableTransaction />
                         </div>

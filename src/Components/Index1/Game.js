@@ -330,14 +330,14 @@ const Game = ({ id, owned, close, expires }) => {
     } = useContext(Web3WalletContext);
     const {
         readBalanceOf,
-        readDepositedTokens
+        readDepositedTokens,
+        symbol
     } = useContext(ContractFunctionsContext)
 
     // console.log('UserConnected', userConnected);
     // console.log('AccountAddress', accountAddress);
     // console.log('WalletConnected', walletConnected);
     // console.log('Wallet Balance' , WalletBalance);
-
 
 
 
@@ -398,7 +398,7 @@ const Game = ({ id, owned, close, expires }) => {
 
                         </div>
                         <h1 className="price">{"Available cash: " + Math.round((balance * 100)) / 100 + "$"}</h1>
-                        {/* <h1 className="price">{"Available cash: " + readBalanceOf+ "$"}</h1> */}
+                        {/* <h1 className="price">{userConnected == true ? "Available cash: "+ readBalanceOf +''+ symbol :'Available cash:'}</h1> */}
                         <button onClick={() => setBalance(balance + 1000)} className="buyMoreButton">Add 1000 $</button>
                     </div>
                     <div className='col-md-2  my-auto ' >

@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import DataTable, { createTheme } from 'react-data-table-component';
 import { Web3WalletContext } from '../../Context/UseContext';
 import { ContractFunctionsContext } from '../Utils/ContractFunctions';
+import TableLoader from './TableLoader';
 
 export default function Transaction() {
   createTheme('solarized', {
@@ -28,11 +29,11 @@ export default function Transaction() {
       disabled: 'rgba(0,0,0,.12)',
     },
   }, 'dark');
-  const { transactionList} = useContext(ContractFunctionsContext);
+  const { transactionList } = useContext(ContractFunctionsContext);
 
   let reverseTransactions = [...transactionList]
   console.log(reverseTransactions);
-  const {userConnected} = useContext(Web3WalletContext);
+  const { userConnected } = useContext(Web3WalletContext);
   const columns = [
     {
       name: 'Account Address',
@@ -52,6 +53,10 @@ export default function Transaction() {
     }
   ];
 
+  const [loading, setLoading] = useState(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
 
   return (
     <>
@@ -59,17 +64,18 @@ export default function Transaction() {
 
         <DataTable
           columns={columns}
-          // data={userConnected == true ? reverseTransactions :  ''}
-          data={userConnected == true ?reverseTransactions.reverse() : ''}
+          data={userConnected == true ? reverseTransactions.reverse()  : ''}
           subHeader
           subHeaderAlign='center'
           fixedHeader
           fixedHeaderScrollHeight='25rem'
           subHeaderComponent={<h1 className='text-primary '>Users Recent Transactions</h1>}
           theme='solarized'
+          progressPending={loading}
+          progressComponent={<TableLoader />}
           pagination
           highlightOnHover
-          style={{height : '100%'}}
+          style={{ height: '100%' }}
         />
 
       </div>
