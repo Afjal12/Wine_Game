@@ -22,6 +22,7 @@ body {
     background-color: #ffffff;
     /* width: 400px; */
     padding: 25px;
+    max-width: 500px;
     /* position: absolute; */
     /* transform: translate(-50%, -50%); */
     /* top: 50%; */
