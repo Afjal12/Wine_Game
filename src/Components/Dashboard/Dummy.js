@@ -13,12 +13,12 @@ let barChartData = {
         // },
         {
             name: 'No. of Buy Token',
-            data: [8, 13, 27],
+            data: [8, 13, 30],
             color: '#85F4FA'
         },
         {
             name: 'Total Withdraw Token',
-            data: [13, 19, 23],
+            data: [13, 19, 25],
             color: '#1240e9'
         }
     ],
