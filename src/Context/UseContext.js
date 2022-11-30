@@ -73,7 +73,7 @@ export default function MetamskConnect({ children }) {
       metamaskAccounts = await window?.ethereum?.request({
         method: "eth_requestAccounts",
       });
-      console.log(metamaskAccounts, "Metamask Account");
+      // console.log(metamaskAccounts, "Metamask Account");
       if (window?.ethereum?.networkVersion == '5'  || window?.ethereum?.networkVersion == '69' || window?.ethereum?.networkVersion == '80001') {
         return metamaskAccounts[0] 
       } else {
@@ -100,10 +100,10 @@ export default function MetamskConnect({ children }) {
         params: [await response, 'latest']
       }).then(balance => {
         // Return string value to convert it into int balance
-        console.log('Metamask Balance Hex Value', balance)
+        // console.log('Metamask Balance Hex Value', balance)
         // Yarn add ethers for using ethers utils or
         // npm install ethers
-        console.log('Metamask Balance Decimal value' ,ethers.utils.formatEther(balance))
+        // console.log('Metamask Balance Decimal value' ,ethers.utils.formatEther(balance))
         setWalletBalanceInNumber(ethers.utils.formatEther(balance))
         if(window?.ethereum?.networkVersion == '80001'){
 

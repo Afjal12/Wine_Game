@@ -34,7 +34,7 @@ export default function ContractFunctions({ children }) {
         userConnected,
     ];
 
-    console.log(...dependencies);
+    // console.log(...dependencies);
     // -------------------
 
 
@@ -47,16 +47,16 @@ export default function ContractFunctions({ children }) {
     }
     const getToken = async (e) => {
         //  Function name - BuyTokens hai -write method ka 
-        console.log("get token chal raha hai ");
+        // console.log("get token chal raha hai ");
         e.preventDefault();
         try {
             const provider = await new ethers.providers.Web3Provider(window.ethereum);
             const signer = await provider.getSigner();
             const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
-            console.log(daiContract);
-            console.log(accountAddress);
-            console.log(token);
-            console.log(matic);
+            // console.log(daiContract);
+            // console.log(accountAddress);
+            // console.log(token);
+            // console.log(matic);
 
             const decimal = await daiContract.BuyTokens(accountAddress, token, {
                 value: parseEther(matic)
@@ -65,13 +65,13 @@ export default function ContractFunctions({ children }) {
             await decimal.wait()
             setBalanceReload(!balanceReload)
             setLoader(false)
-            console.log(decimal);
+            // console.log(decimal);
             // decimal.wait()
             toast.success('Transaction Successful')
 
         } catch (error) {
             setLoader(false)
-            console.log(error);
+            // console.log(error);
             toast.warn('Transaction Failed')
         }
     }
@@ -92,10 +92,10 @@ export default function ContractFunctions({ children }) {
             const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
             let fun = await daiContract.balanceOf(accountAddress);
             let decimal = fun.toString()
-            console.log(decimal);
+            // console.log(decimal);
             setreadBalanceOf(decimal);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
     const depositedTokens = async () => {
@@ -107,11 +107,11 @@ export default function ContractFunctions({ children }) {
             const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
             let deposit = await daiContract.DepositedTokens(accountAddress);
             let decimal = deposit.toString();
-            console.log(decimal);
+            // console.log(decimal);
             setreadDepositedTokens(decimal)
 
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
 
@@ -133,19 +133,19 @@ export default function ContractFunctions({ children }) {
                 const provider = await new ethers.providers.Web3Provider(window.ethereum);
                 const signer = await provider.getSigner();
                 const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
-                console.log(daiContract);
-                console.log(withdrawAddress);
-                console.log(withdrawTokens);
+                // console.log(daiContract);
+                // console.log(withdrawAddress);
+                // console.log(withdrawTokens);
                 let withdraw = await daiContract.withdrawTokens(withdrawAddress, withdrawTokens);
                 setLoader(true)
                 withdraw.wait()
                 setLoader(false)
-                console.log(withdraw);
+                // console.log(withdraw);
                 toast.success('Token withdrawed successfully')
 
             } catch (error) {
                 setLoader(false)
-                console.log(error);
+                // console.log(error);
                 toast.warn('Token withdrawed failed')
             }
         } else {
@@ -171,11 +171,11 @@ export default function ContractFunctions({ children }) {
             await Eth.wait();
             setLoader(false)
             setDepositReload(!depositReload)
-            console.log(Eth);
+            // console.log(Eth);
             toast.success('Token Deposit Successfully')
         } catch (error) {
             setLoader(false)
-            console.log(error);
+            // console.log(error);
             toast.warn('Transaction Failed')
         }
     }
@@ -187,7 +187,7 @@ export default function ContractFunctions({ children }) {
     let userAddress = accountAddress;
 
     const [hash, setHash] = useState('');
-    console.log(userSelect);
+    // console.log(userSelect);
 
 
     const handleBetToken = (e) => {
@@ -207,8 +207,8 @@ export default function ContractFunctions({ children }) {
                 setLoader(true)
                 await bet.wait()
                 setLoader(false)
-                console.log(userAddress, bettoken, TimesProfit, userSelect);
-                console.log(bet);
+                // console.log(userAddress, bettoken, TimesProfit, userSelect);
+                // console.log(bet);
                 setHash(bet?.hash)
                 toast.success('Transaction Successful')
                 setBetReload(!betReload)
@@ -216,7 +216,7 @@ export default function ContractFunctions({ children }) {
             } catch (error) {
                 toast.warn('Transaction Failed')
                 setLoader(false)
-                console.log(error);
+                // console.log(error);
             }
         } else {
             toast.warn('Enter a Valid Value');
@@ -236,7 +236,7 @@ export default function ContractFunctions({ children }) {
                 let smbl = await daiContract.symbol();
                 setsymbol(smbl)
             } catch (error) {
-                console.log(error);
+                // console.log(error);
             }
 
         }
@@ -254,11 +254,11 @@ export default function ContractFunctions({ children }) {
             const provider = await new ethers.providers.Web3Provider(window.ethereum);
             const signer = await provider.getSigner();
             const daiContract = await new ethers.Contract(Contract_Address, SmartContractABI, signer);
-            console.log(daiContract);
+            // console.log(daiContract);
             let transactions = await daiContract.GetTransactionHistory()
             setTransactionList(transactions)
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     }
 
@@ -372,7 +372,7 @@ export default function ContractFunctions({ children }) {
 //       );
 
 //       erc20.on("Transfer", (from, to, amount, event) => {
-//         console.log({ from, to, amount, event });
+        // console.log({ from, to, amount, event });
 
 //         setTxs((currentTxs) => [
 //           ...currentTxs,
