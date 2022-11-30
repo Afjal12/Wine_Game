@@ -32,7 +32,7 @@ export default function Transaction() {
   const { transactionList } = useContext(ContractFunctionsContext);
 
   let reverseTransactions = [...transactionList]
-  console.log(reverseTransactions);
+  // console.log(reverseTransactions);
   const { userConnected } = useContext(Web3WalletContext);
   const columns = [
     {
