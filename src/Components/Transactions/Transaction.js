@@ -37,7 +37,7 @@ export default function Transaction() {
   const columns = [
     {
       name: 'Account Address',
-      selector: row => row.user,
+      selector: row => row.user.slice(0, 10) + '...',
     },
     {
       name: 'Bet Time',
@@ -50,13 +50,25 @@ export default function Transaction() {
     {
       name: 'Head or Tail',
       selector: row => row._HeadOrTail.toString()
+    },
+    {
+      name: 'Result',
+      selector: (row) => {
+        if (row._HeadOrTail == 'Head' && row.result == true || row._HeadOrTail == 'Tail' && row.result == false) {
+          return 'Head'
+        }
+        else if (row._HeadOrTail == 'Tail' && row.result == true || row._HeadOrTail == 'Head' && row.result == false) {
+          return 'Tail'
+        }
+
+      }
     }
   ];
 
   const [loading, setLoading] = useState(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 2000)
+  setTimeout(() => {
+    setLoading(false)
+  }, 2000)
 
   return (
     <>
@@ -64,7 +76,7 @@ export default function Transaction() {
 
         <DataTable
           columns={columns}
-          data={userConnected == true ? reverseTransactions.reverse()  : ''}
+          data={userConnected == true ? reverseTransactions.reverse() : ''}
           subHeader
           subHeaderAlign='center'
           fixedHeader
