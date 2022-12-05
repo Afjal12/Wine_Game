@@ -361,16 +361,7 @@ const Game = ({ id, owned, close, expires }) => {
                     </div>
                 </div>
 
-                <div className='pt-5 row w-100' style={{
-                    border: 'unset',
-                    background: 'unset',
-                    height: '100vh'
-
-                }}>
-                    <div className='col-md-8 text-white'>
-
-                    </div>
-                
+                <div className='pt-5 d-flex game-main  w-100'>
 
                     <div className="fullSlot col-md-10 p-2 game-css">
 
@@ -395,20 +386,23 @@ const Game = ({ id, owned, close, expires }) => {
                         </h1>
                         <div className="slotFoot">
                             <input value={input} type="number" onChange={(e) => numChecker(e)} className="betInput" placeholder="0$"></input>
-
                         </div>
                         <h1 className="price">{"Available cash: " + Math.round((balance * 100)) / 100 + "$"}</h1>
                         {/* <h1 className="price">{userConnected == true ? "Available cash: "+ readBalanceOf +''+ symbol :'Available cash:'}</h1> */}
                         <button onClick={() => setBalance(balance + 1000)} className="buyMoreButton">Add 1000 $</button>
                     </div>
                     <div className='col-md-2  my-auto ' >
-                    {
+                        {
                             userConnected === true ?
 
-                                <button id='handle-btn' onClick={() => play()} style={{
-                                    background: 'transparent',
-                                    border: 'unset'
-                                }}>
+                                <button
+                                    id='handle-btn'
+                                    
+                                    onClick={() => play()}
+                                    style={{
+                                        background: 'transparent',
+                                        border: 'unset'
+                                    }}>
                                     {
 
                                         <img src={slotHandle} alt="image" width='100%' />
@@ -418,7 +412,7 @@ const Game = ({ id, owned, close, expires }) => {
                         }
                     </div>
                 </div>
-              
+
             </section>
 
 
