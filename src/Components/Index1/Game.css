@@ -4,31 +4,32 @@ html,
   padding: 0;
   margin: 0;
   background: #072333;
-  /* font-family: din-2014,sans-serif;
-  font-weight: 800;
-  font-style: normal; */
+  /* min-height: 100vh; */
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* @import url("https://use.typekit.net/yjs2lsy.css"); */
 
 
 .fullSlot {
-  z-index: 100;
-  position: absolute;
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 500px;
-  /* height: calc(100% - 60px); */
   left: 0;
   right: 0;
-  margin: auto;
   align-items: center;
   background-color: #1f2b5e;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.game-main{
+  justify-content: center;
+  border: unset;
+  background: unset;
+  min-height: 100vh;
 }
 
 .casinoName {
@@ -141,13 +142,7 @@ html,
   border-radius: 2px;; 
 }
 
-/* .row {
-  flex: 1 0 auto;
-  margin: 0 5px 0 5px;
-  overflow: hidden;
-  border: solid 2px #ffd9009c;
-  background: linear-gradient(0deg,  rgb(204, 203, 203)  0%, rgb(255, 255, 255)20%, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 80%, rgb(204, 203, 203) 100%);
-} */
+
 
 .ringMoving {
   height: 200px;
