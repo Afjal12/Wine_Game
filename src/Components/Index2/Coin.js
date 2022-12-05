@@ -11,6 +11,7 @@ import BuyToken from '../BuyToken/BuyToken';
 import DepositEth from '../Dashboard/DepositEth';
 import { ThreeCircles } from 'react-loader-spinner';
 import TransacactionLoader from '../Loader/TransactionLoader';
+import YourTransaction from './YourTransaction';
 
 export default function Coin() {
 
@@ -46,14 +47,16 @@ export default function Coin() {
 
     const flipButton = async (e) => {
         e.preventDefault();
+        coin.style.animation = 'spin 3s infinite linear'
         
+        setDisable(true)
         let batt = await clickHeadOrTail();
         let headOrTail = await getResult();
-
+        setDisable(false)
 
         if (batt == true) {
-            // let i = Math.floor(Math.random() * 10);
             setDisable(true)
+            // let i = Math.floor(Math.random() * 10);
             coin.style.animation = "none";
             if (headOrTail == true && select == 'Head' || headOrTail == false && select == 'Tail') {
                 setTimeout(() => {
@@ -87,6 +90,7 @@ export default function Coin() {
             }
             setTimeout(3000);
         }
+        coin.style.animation = 'none'
     }
 
     const resetButton = (e) => {
@@ -254,6 +258,10 @@ return (
                         </div>
                     </div>
                 </div>
+                </div>
+
+                <div>
+                    <YourTransaction />
                 </div>
             </div>
         

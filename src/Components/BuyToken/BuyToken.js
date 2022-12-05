@@ -15,9 +15,13 @@ import { toast } from 'react-toastify';
 export default function BuyToken() {
     const {
         getToken,
+        buyTokenHash,
+        buyTokenDisable,
         matic,
+        readBalanceOf,
         setMatic,
         token,
+        symbol,
         setToken,
         handleSetMatic
     } = useContext(ContractFunctionsContext);
@@ -39,11 +43,16 @@ export default function BuyToken() {
             toast.warn('Enter a greater than 0 amount')
         }
         else if (+matic > +WalletBalanceInNumber) {
-            toast.warn('Insufficient Balance')
+            toast.warn('!Sorry do not have enough Matic')
         }
     }
 
+  
+    const txUrl = 'https://mumbai.polygonscan.com/tx'
 
+    const viewTx = () =>{
+        window.open(`${txUrl}/${buyTokenHash}`,'_blank')
+    }
 
 
     return (
@@ -58,11 +67,11 @@ export default function BuyToken() {
                         borderRadius: '10px',
                     }}>
                         <h1 className=' text-primary text-center mt-5'>Buy Token Form</h1>
-                        <p className='text-center pt-2'> 1 Matic = 80 token</p>
+                        {/* <p className='text-center pt-2'> 1 Matic = 80 {symbol}</p> */}
                         <form >
 
                             <div className='mt-5'>
-                                <p className='m-0' >How much you want to Convert Matic</p>
+                                <p className='m-0 ' >How much you want to Convert Matic</p>
                                 <input
                                     name='matic'
                                     id='matic'
@@ -76,7 +85,7 @@ export default function BuyToken() {
                             </div>
 
                             <div className='mt-5'>
-                                <p className='m-0'>You will get token</p>
+                                <p className='m-0'>You will get token </p>
 
                                 <input
                                     name='token'
@@ -89,11 +98,26 @@ export default function BuyToken() {
                                 // onChange={handleToken}
                                 />
                             </div>
-                            <p className='text-center mt-5'>
+                            <div className='d-flex justify-content-between my-3 p-2 mx-3'>
+                            <div className='w-50'>
+                                <span className='span-bold'>1 Matic</span><br />
+                                <span>80 {symbol}</span>
+                            </div>
+                            <div className='w-50'>
+                                <span className='span-bold'>Buy Token Fee</span><br />
+                                <span>3 %</span>
+
+                            </div>
+
+                        </div>
+                            <p className='text-center mt-5 '>
                                 {userConnected == true ?
-                                    <button className='btn btn-warning  ' onClick={+matic > 0 && +matic <= +WalletBalanceInNumber ? getToken : showError}>Buy Token</button>
+                                    <button className='btn btn-warning  mx-4' disabled={buyTokenDisable} onClick={+matic > 0 && +matic <= +WalletBalanceInNumber ? getToken : showError}>Buy Token</button>
                                     :
-                                    <button className='btn btn-primary' onClick={ProvidermetamaskLogin} >Connect Wallet</button>
+                                    <button className='btn btn-primary mx-4' onClick={ProvidermetamaskLogin} >Connect Wallet</button>
+                                }
+                                {  
+                                    buyTokenHash ? <button className='btn btn-success mx-4' onClick={viewTx}>View Transaction</button>:''
                                 }
                             </p>
                         </form>

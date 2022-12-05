@@ -40,6 +40,8 @@ export default function ContractFunctions({ children }) {
 
     const [readBalanceOf, setreadBalanceOf] = useState('');
     const [readDepositedTokens, setreadDepositedTokens] = useState('');
+    const [buyTokenHash , setBuyTokenHash] = useState();
+    const [buyTokenDisable , setBuyTokenDisable] = useState(false)
 
     function handleSetMatic(e) {
         setMatic(e.target.value)
@@ -49,6 +51,7 @@ export default function ContractFunctions({ children }) {
         //  Function name - BuyTokens hai -write method ka 
         // console.log("get token chal raha hai ");
         e.preventDefault();
+        setBuyTokenDisable(true)
         try {
             const provider = await new ethers.providers.Web3Provider(window.ethereum);
             const signer = await provider.getSigner();
@@ -63,14 +66,17 @@ export default function ContractFunctions({ children }) {
             })
             setLoader(true)
             await decimal.wait()
+            setBuyTokenHash(decimal.hash)
             setBalanceReload(!balanceReload)
             setLoader(false)
+            setBuyTokenDisable(false)
             // console.log(decimal);
             // decimal.wait()
             toast.success('Transaction Successful')
 
         } catch (error) {
             setLoader(false)
+            setBuyTokenDisable(false)
             // console.log(error);
             toast.warn('Transaction Failed')
         }
@@ -156,11 +162,16 @@ export default function ContractFunctions({ children }) {
     /// Write method ka Deposit-eth function
 
     const [DepositTokens, setDepositTokens] = useState();
+    const [DepositHash , setDepositHash] = useState();
+    const [DepositBtnDisable , setDepositBtnDisable ] = useState(false)
+
+
     const handleDeposit = (e) => {
         setDepositTokens(e.target.value)
     }
 
     const ClickDepositEth = async (e) => {
+        setDepositBtnDisable(true)
         e.preventDefault()
         try {
             const provider = await new ethers.providers.Web3Provider(window.ethereum);
@@ -169,12 +180,15 @@ export default function ContractFunctions({ children }) {
             let Eth = await daiContract.DepositEth(DepositTokens)
             setLoader(true)
             await Eth.wait();
+            setDepositHash(Eth.hash)
             setLoader(false)
+            setDepositBtnDisable(false)
             setDepositReload(!depositReload)
             // console.log(Eth);
             toast.success('Token Deposit Successfully')
         } catch (error) {
             setLoader(false)
+            setDepositBtnDisable(false)
             // console.log(error);
             toast.warn('Transaction Failed')
         }
@@ -275,6 +289,8 @@ export default function ContractFunctions({ children }) {
 
     return (
         <ContractFunctionsContext.Provider value={{
+            buyTokenHash,
+            buyTokenDisable,
             getToken,
             readBalanceOf,
             readDepositedTokens,
@@ -288,6 +304,8 @@ export default function ContractFunctions({ children }) {
             ClickWithdrawFunction,
             handleDeposit,
             ClickDepositEth,
+            DepositBtnDisable,
+            DepositHash,
             handleBetToken,
             setUserSelect,
             clickHeadOrTail,

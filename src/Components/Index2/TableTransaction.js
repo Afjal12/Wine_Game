@@ -9,7 +9,7 @@ export default function TableTransaction() {
     const columns = [
         {
             name: 'Address',
-            selector: row => row.user
+            selector: row => row.user.slice(0,10) + '...'
         },
         {
             name: 'Bet Tokens',
@@ -26,7 +26,22 @@ export default function TableTransaction() {
              return dt
             }
         },
+        {
+            name : 'Head or Tail',
+            selector : row => row._HeadOrTail
+        },
+        // {
+        //     name : 'Result',
+        //     selector : (row) => {
+        //         if (row._HeadOrTail == 'Head' && row.result == true || row._HeadOrTail == 'Tail' && row.result == false) {
+        //            return 'Head' 
+        //         }
+        //         else if (row._HeadOrTail == 'Tail' && row.result == true || row._HeadOrTail == 'Head' && row.result == false) {
+        //             return 'Tail'
+        //         }
 
+        //     }
+        // }
     ];
 
     createTheme('solarized', {
